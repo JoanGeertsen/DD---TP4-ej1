@@ -5,6 +5,6 @@ namespace TPherencia
         public Form1()
         {
             InitializeComponent();
-        }
+        }        
     }
 }
