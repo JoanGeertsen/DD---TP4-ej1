@@ -1,8 +1,8 @@
 namespace TPherencia
 {
-    public partial class Form1 : Form
+    public partial class FPersonas : Form
     {
-        public Form1()
+        public FPersonas()
         {
             InitializeComponent();
         }        

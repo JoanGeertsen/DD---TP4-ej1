@@ -1,6 +1,6 @@
 ﻿namespace TPherencia
 {
-    partial class Form1
+    partial class FPersonas
     {
         /// <summary>
         ///  Required designer variable.
