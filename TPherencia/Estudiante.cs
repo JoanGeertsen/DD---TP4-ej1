@@ -19,6 +19,7 @@ namespace DD_TP3_ej1
         public Estudiante(string documento, string legajo): base(documento) 
         {
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
+            carrera = ""; fechaDeIngreso = "";
         }
 
         public Estudiante(String documento, string nombre, string apellido, string fechaNacimiento,
@@ -27,6 +28,26 @@ namespace DD_TP3_ej1
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
             this.carrera = (carrera != null) ? carrera : "";
             this.fechaDeIngreso = (fechaDeIngreso != null) ? fechaDeIngreso : "";            
+        }
+        #endregion
+
+        #region Property
+        public string Legajo
+        {
+            get { return legajo; }
+            set { legajo = (legajo.Length == 6) ? legajo: legajoPorDefecto; }
+        }
+
+        public string Carrera
+        {
+            get { return carrera; }
+            set { carrera = (carrera != null) ? carrera : ""; }
+        }
+
+        public string FechaDeIngreso
+        {
+            get { return fechaDeIngreso; }
+            set { fechaDeIngreso = (fechaDeIngreso != null) ? fechaDeIngreso : ""; }
         }
         #endregion
 
