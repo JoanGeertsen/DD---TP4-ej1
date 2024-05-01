@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "DD TP3 ej1/1.0.0": {
+        "runtime": {
+          "DD TP3 ej1.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DD TP3 ej1/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

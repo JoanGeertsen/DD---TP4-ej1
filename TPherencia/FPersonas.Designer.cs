@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             pPersona = new Panel();
+            checkBox1 = new CheckBox();
             dtFechaNacimiento = new DateTimePicker();
             mtDni = new MaskedTextBox();
             tApellido = new TextBox();
@@ -37,25 +39,26 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            checkBox1 = new CheckBox();
-            panel1 = new Panel();
-            label5 = new Label();
-            cbFiltros = new ComboBox();
-            lbPersonas = new ListBox();
-            panel2 = new Panel();
-            label6 = new Label();
-            mtLegajo = new MaskedTextBox();
-            label7 = new Label();
-            tCarrera = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            pLista = new Panel();
             lbCantidad = new Label();
+            lbPersonas = new ListBox();
+            cbFiltros = new ComboBox();
+            label5 = new Label();
+            pEstudiante = new Panel();
             label8 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            tCarrera = new TextBox();
+            label7 = new Label();
+            mtLegajo = new MaskedTextBox();
+            label6 = new Label();
             bBuscar = new Button();
             bGuardar = new Button();
             bCancelar = new Button();
+            errorProvider1 = new ErrorProvider(components);
             pPersona.SuspendLayout();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            pLista.SuspendLayout();
+            pEstudiante.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // pPersona
@@ -74,6 +77,17 @@
             pPersona.Name = "pPersona";
             pPersona.Size = new Size(298, 147);
             pPersona.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(92, 121);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(81, 19);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "Estudiante";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // dtFechaNacimiento
             // 
@@ -141,109 +155,17 @@
             label1.TabIndex = 1;
             label1.Text = "Nombre:";
             // 
-            // checkBox1
+            // pLista
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(92, 121);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(81, 19);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "Estudiante";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.PeachPuff;
-            panel1.Controls.Add(lbCantidad);
-            panel1.Controls.Add(lbPersonas);
-            panel1.Controls.Add(cbFiltros);
-            panel1.Controls.Add(label5);
-            panel1.Location = new Point(316, 12);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(194, 255);
-            panel1.TabIndex = 10;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(12, 6);
-            label5.Name = "label5";
-            label5.Size = new Size(37, 15);
-            label5.TabIndex = 10;
-            label5.Text = "Filtro:";
-            // 
-            // cbFiltros
-            // 
-            cbFiltros.FormattingEnabled = true;
-            cbFiltros.Location = new Point(12, 24);
-            cbFiltros.Name = "cbFiltros";
-            cbFiltros.Size = new Size(170, 23);
-            cbFiltros.TabIndex = 11;
-            cbFiltros.Text = "TODOS";
-            // 
-            // lbPersonas
-            // 
-            lbPersonas.FormattingEnabled = true;
-            lbPersonas.ItemHeight = 15;
-            lbPersonas.Location = new Point(12, 53);
-            lbPersonas.Name = "lbPersonas";
-            lbPersonas.Size = new Size(170, 169);
-            lbPersonas.TabIndex = 12;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.PaleGreen;
-            panel2.Controls.Add(label8);
-            panel2.Controls.Add(dateTimePicker1);
-            panel2.Controls.Add(tCarrera);
-            panel2.Controls.Add(label7);
-            panel2.Controls.Add(mtLegajo);
-            panel2.Controls.Add(label6);
-            panel2.Location = new Point(12, 165);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(298, 102);
-            panel2.TabIndex = 13;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(47, 11);
-            label6.Name = "label6";
-            label6.Size = new Size(45, 15);
-            label6.TabIndex = 10;
-            label6.Text = "Legajo:";
-            // 
-            // mtLegajo
-            // 
-            mtLegajo.Location = new Point(98, 8);
-            mtLegajo.Mask = "000000";
-            mtLegajo.Name = "mtLegajo";
-            mtLegajo.Size = new Size(81, 23);
-            mtLegajo.TabIndex = 10;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(44, 49);
-            label7.Name = "label7";
-            label7.Size = new Size(48, 15);
-            label7.TabIndex = 11;
-            label7.Text = "Carrera:";
-            // 
-            // tCarrera
-            // 
-            tCarrera.Location = new Point(98, 41);
-            tCarrera.Name = "tCarrera";
-            tCarrera.Size = new Size(181, 23);
-            tCarrera.TabIndex = 10;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(98, 70);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(97, 23);
-            dateTimePicker1.TabIndex = 10;
+            pLista.BackColor = Color.PeachPuff;
+            pLista.Controls.Add(lbCantidad);
+            pLista.Controls.Add(lbPersonas);
+            pLista.Controls.Add(cbFiltros);
+            pLista.Controls.Add(label5);
+            pLista.Location = new Point(316, 12);
+            pLista.Name = "pLista";
+            pLista.Size = new Size(194, 255);
+            pLista.TabIndex = 10;
             // 
             // lbCantidad
             // 
@@ -254,6 +176,48 @@
             lbCantidad.TabIndex = 13;
             lbCantidad.Text = "Cantidad:";
             // 
+            // lbPersonas
+            // 
+            lbPersonas.FormattingEnabled = true;
+            lbPersonas.ItemHeight = 15;
+            lbPersonas.Location = new Point(12, 53);
+            lbPersonas.Name = "lbPersonas";
+            lbPersonas.Size = new Size(170, 169);
+            lbPersonas.TabIndex = 12;
+            // 
+            // cbFiltros
+            // 
+            cbFiltros.FormattingEnabled = true;
+            cbFiltros.Location = new Point(12, 24);
+            cbFiltros.Name = "cbFiltros";
+            cbFiltros.Size = new Size(170, 23);
+            cbFiltros.TabIndex = 11;
+            cbFiltros.Text = "TODOS";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 6);
+            label5.Name = "label5";
+            label5.Size = new Size(37, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Filtro:";
+            // 
+            // pEstudiante
+            // 
+            pEstudiante.BackColor = Color.PaleGreen;
+            pEstudiante.Controls.Add(label8);
+            pEstudiante.Controls.Add(dateTimePicker1);
+            pEstudiante.Controls.Add(tCarrera);
+            pEstudiante.Controls.Add(label7);
+            pEstudiante.Controls.Add(mtLegajo);
+            pEstudiante.Controls.Add(label6);
+            pEstudiante.Location = new Point(12, 165);
+            pEstudiante.Name = "pEstudiante";
+            pEstudiante.Size = new Size(298, 102);
+            pEstudiante.TabIndex = 13;
+            pEstudiante.Visible = false;
+            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -263,6 +227,47 @@
             label8.TabIndex = 12;
             label8.Text = "Fecha Ingreso:";
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(98, 70);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(97, 23);
+            dateTimePicker1.TabIndex = 10;
+            // 
+            // tCarrera
+            // 
+            tCarrera.Location = new Point(98, 41);
+            tCarrera.Name = "tCarrera";
+            tCarrera.Size = new Size(181, 23);
+            tCarrera.TabIndex = 10;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(44, 49);
+            label7.Name = "label7";
+            label7.Size = new Size(48, 15);
+            label7.TabIndex = 11;
+            label7.Text = "Carrera:";
+            // 
+            // mtLegajo
+            // 
+            mtLegajo.Location = new Point(98, 8);
+            mtLegajo.Mask = "000000";
+            mtLegajo.Name = "mtLegajo";
+            mtLegajo.Size = new Size(81, 23);
+            mtLegajo.TabIndex = 10;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(47, 11);
+            label6.Name = "label6";
+            label6.Size = new Size(45, 15);
+            label6.TabIndex = 10;
+            label6.Text = "Legajo:";
+            // 
             // bBuscar
             // 
             bBuscar.Location = new Point(12, 273);
@@ -270,7 +275,8 @@
             bBuscar.Size = new Size(75, 23);
             bBuscar.TabIndex = 14;
             bBuscar.Text = "Buscar";
-            bBuscar.UseVisualStyleBackColor = true;            
+            bBuscar.UseVisualStyleBackColor = true;
+            bBuscar.Click += bBuscar_Click;
             // 
             // bGuardar
             // 
@@ -290,7 +296,11 @@
             bCancelar.Text = "Cancelar";
             bCancelar.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // FPersonas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -298,17 +308,18 @@
             Controls.Add(bCancelar);
             Controls.Add(bGuardar);
             Controls.Add(bBuscar);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(pEstudiante);
+            Controls.Add(pLista);
             Controls.Add(pPersona);
-            Name = "Form1";
+            Name = "FPersonas";
             Text = "Personas";
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            pLista.ResumeLayout(false);
+            pLista.PerformLayout();
+            pEstudiante.ResumeLayout(false);
+            pEstudiante.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -324,11 +335,11 @@
         private TextBox tApellido;
         private DateTimePicker dtFechaNacimiento;
         private CheckBox checkBox1;
-        private Panel panel1;
+        private Panel pLista;
         private ListBox lbPersonas;
         private ComboBox cbFiltros;
         private Label label5;
-        private Panel panel2;
+        private Panel pEstudiante;
         private Label label6;
         private Label lbCantidad;
         private Label label8;
@@ -339,5 +350,6 @@
         private Button bBuscar;
         private Button bGuardar;
         private Button bCancelar;
+        private ErrorProvider errorProvider1;
     }
 }

@@ -51,6 +51,12 @@ namespace DD_TP3_ej1
         }
         #endregion
 
+        #region Consultas
+        public string mostrar()
+        {
+            return base.mostrar() + $"{legajo}, {carrera}, {fechaDeIngreso}";
+        }
+        #endregion
 
     }
 }
