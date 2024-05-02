@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             pPersona = new Panel();
-            checkBox1 = new CheckBox();
+            chEstudiante = new CheckBox();
             dtFechaNacimiento = new DateTimePicker();
             mtDni = new MaskedTextBox();
             tApellido = new TextBox();
@@ -46,7 +46,7 @@
             label5 = new Label();
             pEstudiante = new Panel();
             label8 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dtFechaIngreso = new DateTimePicker();
             tCarrera = new TextBox();
             label7 = new Label();
             mtLegajo = new MaskedTextBox();
@@ -64,7 +64,7 @@
             // pPersona
             // 
             pPersona.BackColor = Color.PaleTurquoise;
-            pPersona.Controls.Add(checkBox1);
+            pPersona.Controls.Add(chEstudiante);
             pPersona.Controls.Add(dtFechaNacimiento);
             pPersona.Controls.Add(mtDni);
             pPersona.Controls.Add(tApellido);
@@ -78,16 +78,16 @@
             pPersona.Size = new Size(298, 147);
             pPersona.TabIndex = 0;
             // 
-            // checkBox1
+            // chEstudiante
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(92, 121);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(81, 19);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "Estudiante";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            chEstudiante.AutoSize = true;
+            chEstudiante.Location = new Point(92, 121);
+            chEstudiante.Name = "chEstudiante";
+            chEstudiante.Size = new Size(81, 19);
+            chEstudiante.TabIndex = 9;
+            chEstudiante.Text = "Estudiante";
+            chEstudiante.UseVisualStyleBackColor = true;
+            chEstudiante.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // dtFechaNacimiento
             // 
@@ -207,7 +207,7 @@
             // 
             pEstudiante.BackColor = Color.PaleGreen;
             pEstudiante.Controls.Add(label8);
-            pEstudiante.Controls.Add(dateTimePicker1);
+            pEstudiante.Controls.Add(dtFechaIngreso);
             pEstudiante.Controls.Add(tCarrera);
             pEstudiante.Controls.Add(label7);
             pEstudiante.Controls.Add(mtLegajo);
@@ -227,13 +227,13 @@
             label8.TabIndex = 12;
             label8.Text = "Fecha Ingreso:";
             // 
-            // dateTimePicker1
+            // dtFechaIngreso
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(98, 70);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(97, 23);
-            dateTimePicker1.TabIndex = 10;
+            dtFechaIngreso.Format = DateTimePickerFormat.Short;
+            dtFechaIngreso.Location = new Point(98, 70);
+            dtFechaIngreso.Name = "dtFechaIngreso";
+            dtFechaIngreso.Size = new Size(97, 23);
+            dtFechaIngreso.TabIndex = 10;
             // 
             // tCarrera
             // 
@@ -286,6 +286,7 @@
             bGuardar.TabIndex = 15;
             bGuardar.Text = "Guardar";
             bGuardar.UseVisualStyleBackColor = true;
+            bGuardar.Click += bGuardar_Click;
             // 
             // bCancelar
             // 
@@ -334,7 +335,7 @@
         private MaskedTextBox mtDni;
         private TextBox tApellido;
         private DateTimePicker dtFechaNacimiento;
-        private CheckBox checkBox1;
+        private CheckBox chEstudiante;
         private Panel pLista;
         private ListBox lbPersonas;
         private ComboBox cbFiltros;
@@ -343,7 +344,7 @@
         private Label label6;
         private Label lbCantidad;
         private Label label8;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtFechaIngreso;
         private TextBox tCarrera;
         private Label label7;
         private MaskedTextBox mtLegajo;

@@ -54,7 +54,7 @@ namespace DD_TP3_ej1
         #region Consultas
         public string mostrar()
         {
-            return base.mostrar() + $"{legajo}, {carrera}, {fechaDeIngreso}";
+            return base.mostrar() + $"\nLegajo: {legajo}\n {carrera} \nFecha de ingreso: {fechaDeIngreso}";
         }
         #endregion
 
