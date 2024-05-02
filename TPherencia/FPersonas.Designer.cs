@@ -54,11 +54,11 @@
             bBuscar = new Button();
             bGuardar = new Button();
             bCancelar = new Button();
-            errorProvider1 = new ErrorProvider(components);
+            errorProvider = new ErrorProvider(components);
             pPersona.SuspendLayout();
             pLista.SuspendLayout();
             pEstudiante.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // pPersona
@@ -75,7 +75,7 @@
             pPersona.Controls.Add(label1);
             pPersona.Location = new Point(12, 12);
             pPersona.Name = "pPersona";
-            pPersona.Size = new Size(298, 147);
+            pPersona.Size = new Size(307, 147);
             pPersona.TabIndex = 0;
             // 
             // chEstudiante
@@ -96,6 +96,8 @@
             dtFechaNacimiento.Name = "dtFechaNacimiento";
             dtFechaNacimiento.Size = new Size(97, 23);
             dtFechaNacimiento.TabIndex = 8;
+            dtFechaNacimiento.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtFechaNacimiento.Leave += dtFechaNacimiento_Leave;
             // 
             // mtDni
             // 
@@ -104,6 +106,7 @@
             mtDni.Name = "mtDni";
             mtDni.Size = new Size(197, 23);
             mtDni.TabIndex = 7;
+            mtDni.Leave += mtDni_Leave;
             // 
             // tApellido
             // 
@@ -111,6 +114,8 @@
             tApellido.Name = "tApellido";
             tApellido.Size = new Size(197, 23);
             tApellido.TabIndex = 6;
+            tApellido.KeyPress += tApellido_KeyPress;
+            tApellido.Leave += tApellido_Leave;
             // 
             // tNombre
             // 
@@ -118,6 +123,8 @@
             tNombre.Name = "tNombre";
             tNombre.Size = new Size(197, 23);
             tNombre.TabIndex = 5;
+            tNombre.KeyPress += tNombre_KeyPress;
+            tNombre.Leave += tNombre_Leave;
             // 
             // label4
             // 
@@ -162,7 +169,7 @@
             pLista.Controls.Add(lbPersonas);
             pLista.Controls.Add(cbFiltros);
             pLista.Controls.Add(label5);
-            pLista.Location = new Point(316, 12);
+            pLista.Location = new Point(325, 12);
             pLista.Name = "pLista";
             pLista.Size = new Size(194, 255);
             pLista.TabIndex = 10;
@@ -214,7 +221,7 @@
             pEstudiante.Controls.Add(label6);
             pEstudiante.Location = new Point(12, 165);
             pEstudiante.Name = "pEstudiante";
-            pEstudiante.Size = new Size(298, 102);
+            pEstudiante.Size = new Size(307, 102);
             pEstudiante.TabIndex = 13;
             pEstudiante.Visible = false;
             // 
@@ -234,6 +241,8 @@
             dtFechaIngreso.Name = "dtFechaIngreso";
             dtFechaIngreso.Size = new Size(97, 23);
             dtFechaIngreso.TabIndex = 10;
+            dtFechaIngreso.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtFechaIngreso.Leave += dtFechaIngreso_Leave;
             // 
             // tCarrera
             // 
@@ -241,6 +250,8 @@
             tCarrera.Name = "tCarrera";
             tCarrera.Size = new Size(181, 23);
             tCarrera.TabIndex = 10;
+            tCarrera.KeyPress += tCarrera_KeyPress;
+            tCarrera.Leave += tCarrera_Leave;
             // 
             // label7
             // 
@@ -258,6 +269,7 @@
             mtLegajo.Name = "mtLegajo";
             mtLegajo.Size = new Size(81, 23);
             mtLegajo.TabIndex = 10;
+            mtLegajo.Leave += mtLegajo_Leave;
             // 
             // label6
             // 
@@ -276,7 +288,6 @@
             bBuscar.TabIndex = 14;
             bBuscar.Text = "Buscar";
             bBuscar.UseVisualStyleBackColor = true;
-            bBuscar.Click += bBuscar_Click;
             // 
             // bGuardar
             // 
@@ -290,22 +301,22 @@
             // 
             // bCancelar
             // 
-            bCancelar.Location = new Point(435, 273);
+            bCancelar.Location = new Point(444, 273);
             bCancelar.Name = "bCancelar";
             bCancelar.Size = new Size(75, 23);
             bCancelar.TabIndex = 16;
             bCancelar.Text = "Cancelar";
             bCancelar.UseVisualStyleBackColor = true;
             // 
-            // errorProvider1
+            // errorProvider
             // 
-            errorProvider1.ContainerControl = this;
+            errorProvider.ContainerControl = this;
             // 
             // FPersonas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(522, 304);
+            ClientSize = new Size(534, 304);
             Controls.Add(bCancelar);
             Controls.Add(bGuardar);
             Controls.Add(bBuscar);
@@ -313,14 +324,14 @@
             Controls.Add(pLista);
             Controls.Add(pPersona);
             Name = "FPersonas";
-            Text = "Personas";
+            Text = "Personas";           
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
             pLista.ResumeLayout(false);
             pLista.PerformLayout();
             pEstudiante.ResumeLayout(false);
             pEstudiante.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
         }
 
@@ -351,6 +362,6 @@
         private Button bBuscar;
         private Button bGuardar;
         private Button bCancelar;
-        private ErrorProvider errorProvider1;
+        private ErrorProvider errorProvider;
     }
 }
