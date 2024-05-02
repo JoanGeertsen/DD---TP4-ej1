@@ -63,10 +63,15 @@ namespace DD_TP3_ej1
         #region Static       
         #endregion
 
-        #region Consulta
+        #region Consultas
         public string mostrar()
         {
             return $"{nombre}, {apellido}\nDocumento: {documento}\nFecha de nacimiento: {fechaNacimiento}";
+        }
+
+        public bool esIgual(string documento)
+        {
+            return this.documento.Equals(documento);
         }
         #endregion
     }
