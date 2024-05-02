@@ -241,7 +241,7 @@
             dtFechaIngreso.Name = "dtFechaIngreso";
             dtFechaIngreso.Size = new Size(97, 23);
             dtFechaIngreso.TabIndex = 10;
-            dtFechaIngreso.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtFechaIngreso.Value = new DateTime(2020, 1, 1, 0, 0, 0, 0);
             dtFechaIngreso.Leave += dtFechaIngreso_Leave;
             // 
             // tCarrera

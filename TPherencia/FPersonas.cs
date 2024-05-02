@@ -37,7 +37,7 @@ namespace TPherencia
         {   //Guardo una Persona
             if (!chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
                 && errorProvider.GetError(dtFechaIngreso) == "")
-            {                
+            {
                 aPersonas[cantPersonas++] = new Persona(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text);
                 MessageBox.Show(aPersonas[cantPersonas - 1].mostrar(), "Persona añadida", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
