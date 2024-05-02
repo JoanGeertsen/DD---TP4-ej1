@@ -102,7 +102,7 @@
             // mtDni
             // 
             mtDni.Location = new Point(92, 63);
-            mtDni.Mask = "00.000.000";
+            mtDni.Mask = "00,000,000";
             mtDni.Name = "mtDni";
             mtDni.Size = new Size(197, 23);
             mtDni.TabIndex = 7;
@@ -324,7 +324,7 @@
             Controls.Add(pLista);
             Controls.Add(pPersona);
             Name = "FPersonas";
-            Text = "Personas";           
+            Text = "Personas";
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
             pLista.ResumeLayout(false);

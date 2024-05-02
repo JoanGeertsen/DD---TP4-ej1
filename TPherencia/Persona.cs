@@ -66,7 +66,7 @@ namespace DD_TP3_ej1
         #region Consulta
         public string mostrar()
         {
-            return $"{nombre}, {apellido}\n Documento: {documento}\n Fecha de nacimiento: {fechaNacimiento}";
+            return $"{nombre}, {apellido}\nDocumento: {documento}\nFecha de nacimiento: {fechaNacimiento}";
         }
         #endregion
     }

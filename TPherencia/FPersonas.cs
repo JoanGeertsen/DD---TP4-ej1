@@ -23,6 +23,7 @@ namespace TPherencia
             cantEstudiantes = 0;
         }
 
+        #region Botones
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (chEstudiante.Checked)
@@ -33,18 +34,22 @@ namespace TPherencia
             else pEstudiante.Visible = false;
         }
         private void bGuardar_Click(object sender, EventArgs e)
-        {   //Voy a guardar un estudiante
+        {   //Guardo una Persona
             if (!chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
                 && errorProvider.GetError(dtFechaIngreso) == "")
-            {
-                MessageBox.Show("Guardando persona"); //Añadir codigo de guardado
+            {                
+                aPersonas[cantPersonas++] = new Persona(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text);
+                MessageBox.Show(aPersonas[cantPersonas - 1].mostrar(), "Persona añadida", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if(chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
+            //Guardo un Estudiante
+            else if (chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
                 && errorProvider.GetError(dtFechaIngreso) == "" && errorProvider.GetError(mtLegajo) == "" && errorProvider.GetError(tCarrera) == "" && errorProvider.GetError(dtFechaIngreso) == "")
             {
-                MessageBox.Show("Guardando estudiante"); //Añadir codigo de guardado
+                aEstudiantes[cantEstudiantes++] = new Estudiante(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text, mtLegajo.Text, tCarrera.Text, dtFechaIngreso.Text);
+                MessageBox.Show(aEstudiantes[cantEstudiantes - 1].mostrar(), "Estudiante añadido", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        #endregion
 
 
         #region KeyPress
@@ -52,7 +57,7 @@ namespace TPherencia
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; 
+                e.Handled = true;
             }
         }
 
@@ -60,7 +65,7 @@ namespace TPherencia
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; 
+                e.Handled = true;
             }
         }
 
@@ -68,7 +73,7 @@ namespace TPherencia
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; 
+                e.Handled = true;
             }
         }
         #endregion
@@ -137,7 +142,7 @@ namespace TPherencia
                 errorProvider.SetError(dtFechaIngreso, "Debe ingresar una fecha VALIDA");
             else
                 errorProvider.SetError(dtFechaIngreso, "");
-        }       
+        }
     }
 
     #endregion
