@@ -101,18 +101,12 @@ namespace TPherencia
         }
 
         private void dtFechaNacimiento_Leave(object sender, EventArgs e)
-        {
-            //Tomamos como politica que tiene que tener al menos 6 años
+        {            
             DateTime fechaNacimiento = dtFechaNacimiento.Value;
-            DateTime fechaHoy = DateTime.Today;
+            DateTime fechaHoy = DateTime.Today;                    
 
-            int edad = fechaHoy.Year - fechaNacimiento.Year;
-
-            if (fechaHoy < fechaNacimiento.AddYears(edad))
-                edad--;
-
-            if (edad < 5)
-                errorProvider.SetError(dtFechaNacimiento, "Solo se admiten estudiantes mayores a 5 años");
+            if (fechaNacimiento <= fechaHoy)
+                errorProvider.SetError(dtFechaNacimiento, "Debe ingresar una fecha VALIDA");
             else
                 errorProvider.SetError(dtFechaNacimiento, "");
         }
@@ -142,7 +136,7 @@ namespace TPherencia
                 errorProvider.SetError(dtFechaIngreso, "Debe ingresar una fecha VALIDA");
             else
                 errorProvider.SetError(dtFechaIngreso, "");
-        }
+        }       
     }
 
     #endregion
