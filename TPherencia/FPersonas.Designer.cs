@@ -96,7 +96,7 @@
             dtFechaNacimiento.Name = "dtFechaNacimiento";
             dtFechaNacimiento.Size = new Size(97, 23);
             dtFechaNacimiento.TabIndex = 8;
-            dtFechaNacimiento.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);          
+            dtFechaNacimiento.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dtFechaNacimiento.Leave += dtFechaNacimiento_Leave;
             // 
             // mtDni
@@ -307,6 +307,7 @@
             bCancelar.TabIndex = 16;
             bCancelar.Text = "Cancelar";
             bCancelar.UseVisualStyleBackColor = true;
+            bCancelar.Click += bCancelar_Click;
             // 
             // errorProvider
             // 
