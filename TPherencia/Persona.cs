@@ -38,25 +38,25 @@ namespace DD_TP3_ej1
         public string Documento
         {
             get { return documento; }
-            set { documento = (documento.Length == 10) ? documento : documentoPorDefecto; }
+            set { documento = (value.Length == 10) ? value : documentoPorDefecto; }
         }
 
         public string Nombre
         {
             get { return nombre; }
-            set { nombre = (nombre != null) ? nombre : ""; }
+            set { nombre = (value != null) ? value : ""; }
         }
 
         public string Apellido
         {
-            get { return Apellido; }
-            set { Apellido = (Apellido != null) ? Apellido : ""; }
+            get { return apellido; }
+            set { apellido = (value != null) ? value : ""; }
         }
 
         public string FechaNacimiento
         {
             get { return fechaNacimiento; }
-            set { fechaNacimiento = (fechaNacimiento != null) ? fechaNacimiento : ""; }
+            set { fechaNacimiento = (value != null) ? value : ""; }
         }
         #endregion
 
@@ -69,9 +69,9 @@ namespace DD_TP3_ej1
             return $"{nombre}, {apellido}\nDocumento: {documento}\nFecha de nacimiento: {fechaNacimiento}";
         }
 
-        public bool esIgual(string documento)
+        public bool esIgual(Persona p)
         {
-            return this.documento.Equals(documento);
+            return documento.Equals(p.Documento);
         }
         #endregion
     }

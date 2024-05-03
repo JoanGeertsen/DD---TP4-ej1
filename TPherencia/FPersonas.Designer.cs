@@ -40,7 +40,7 @@
             label2 = new Label();
             label1 = new Label();
             pLista = new Panel();
-            lbCantidad = new Label();
+            lCantidad = new Label();
             lbPersonas = new ListBox();
             cbFiltros = new ComboBox();
             label5 = new Label();
@@ -165,7 +165,7 @@
             // pLista
             // 
             pLista.BackColor = Color.PeachPuff;
-            pLista.Controls.Add(lbCantidad);
+            pLista.Controls.Add(lCantidad);
             pLista.Controls.Add(lbPersonas);
             pLista.Controls.Add(cbFiltros);
             pLista.Controls.Add(label5);
@@ -174,14 +174,14 @@
             pLista.Size = new Size(194, 255);
             pLista.TabIndex = 10;
             // 
-            // lbCantidad
+            // lCantidad
             // 
-            lbCantidad.AutoSize = true;
-            lbCantidad.Location = new Point(12, 231);
-            lbCantidad.Name = "lbCantidad";
-            lbCantidad.Size = new Size(58, 15);
-            lbCantidad.TabIndex = 13;
-            lbCantidad.Text = "Cantidad:";
+            lCantidad.AutoSize = true;
+            lCantidad.Location = new Point(12, 231);
+            lCantidad.Name = "lCantidad";
+            lCantidad.Size = new Size(58, 15);
+            lCantidad.TabIndex = 13;
+            lCantidad.Text = "Cantidad:";
             // 
             // lbPersonas
             // 
@@ -195,11 +195,14 @@
             // cbFiltros
             // 
             cbFiltros.FormattingEnabled = true;
+            cbFiltros.Items.AddRange(new object[] { "TODOS", "Estudiantes", "NO Estudiantes" });
             cbFiltros.Location = new Point(12, 24);
             cbFiltros.Name = "cbFiltros";
             cbFiltros.Size = new Size(170, 23);
             cbFiltros.TabIndex = 11;
             cbFiltros.Text = "TODOS";
+            cbFiltros.SelectedIndexChanged += cbFiltros_SelectedIndexChanged;
+            cbFiltros.KeyPress += cbFiltros_KeyPress;
             // 
             // label5
             // 
@@ -354,7 +357,7 @@
         private Label label5;
         private Panel pEstudiante;
         private Label label6;
-        private Label lbCantidad;
+        private Label lCantidad;
         private Label label8;
         private DateTimePicker dtFechaIngreso;
         private TextBox tCarrera;

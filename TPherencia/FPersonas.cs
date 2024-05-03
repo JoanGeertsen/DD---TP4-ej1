@@ -23,39 +23,123 @@ namespace TPherencia
             cantEstudiantes = 0;
         }
 
-        #region Botones
+        #region Funcionalidades
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (chEstudiante.Checked)
-            {
                 pEstudiante.Visible = true;
-                mtLegajo.Focus();
-            }
             else pEstudiante.Visible = false;
         }
-        private void bGuardar_Click(object sender, EventArgs e)
-        {   //Guardo una Persona
-            if (!chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
-                && errorProvider.GetError(dtFechaIngreso) == "")
-            {
+
+        private bool existePersona(Persona p)
+        {
+            int i = 0;
+            while (i < cantPersonas && !aPersonas[i].esIgual(p))
+                i++;
+            return i < cantPersonas;
+        }
+
+        private bool existeEstudiante(Estudiante e)
+        {
+            int i = 0;
+            while (i < cantEstudiantes && !aEstudiantes[i].esIgual(e))
+                i++;
+            return i < cantEstudiantes;
+        }
+
+        private bool deseaActualizar()
+        {
+            return MessageBox.Show("Ya está cargado ¿Desea Actualizar sus datos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+        private void actualizarOcrearPersona()
+        {
+            Persona p = new Persona(mtDni.Text);            
+            bool existe = existePersona(p);
+           
+            if (existe && deseaActualizar()) //Actualizo la persona
+            {                
+                int i = 0;
+                while (i < cantPersonas && !aPersonas[i].esIgual(p)) i++;
+                aPersonas[i].Nombre = tNombre.Text; aPersonas[i].Apellido = tApellido.Text;
+                aPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
+            }
+            else if(!existe) //Creo persona                            
                 aPersonas[cantPersonas++] = new Persona(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text);
-                MessageBox.Show(aPersonas[cantPersonas - 1].mostrar(), "Persona añadida", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            //Guardo un Estudiante
-            else if (chEstudiante.Checked && errorProvider.GetError(tNombre) == "" && errorProvider.GetError(tApellido) == "" && errorProvider.GetError(mtDni) == ""
-                && errorProvider.GetError(dtFechaIngreso) == "" && errorProvider.GetError(mtLegajo) == "" && errorProvider.GetError(tCarrera) == "" && errorProvider.GetError(dtFechaIngreso) == "")
+        }
+
+        private void actualizarOcrearEstudiante()
+        {
+            Estudiante e = new Estudiante(mtDni.Text, mtLegajo.Text);
+
+            if (existeEstudiante(e) && deseaActualizar()) //Actualizo persona
             {
-                aEstudiantes[cantEstudiantes++] = new Estudiante(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text, mtLegajo.Text, tCarrera.Text, dtFechaIngreso.Text);
-                MessageBox.Show(aEstudiantes[cantEstudiantes - 1].mostrar(), "Estudiante añadido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int i = 0;
+                while (i < cantEstudiantes && !aEstudiantes[i].esIgual(e)) i++;
+                aEstudiantes[i].Nombre = tNombre.Text; aEstudiantes[i].Apellido = tApellido.Text;
+                aEstudiantes[i].FechaNacimiento = dtFechaNacimiento.Text;
+                aEstudiantes[i].Legajo = mtLegajo.Text; aEstudiantes[i].Carrera = tCarrera.Text;
+                aEstudiantes[i].FechaDeIngreso = dtFechaIngreso.Text;
             }
+            else //Creo persona                            
+                aEstudiantes[cantEstudiantes++] = new Estudiante(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text,
+                    mtLegajo.Text, tCarrera.Text, dtFechaIngreso.Text);
+        }
+
+        private void actualizarListBoxConArreglo(Persona[] a, int tope)
+        {
+            int i = 0;
+            while (i < tope)
+                lbPersonas.Items.Add(a[i++].mostrar());
+        }
+
+        private void actualizarListBox()
+        {
+            lbPersonas.Items.Clear();
+            if (cbFiltros.SelectedIndex == -1 || cbFiltros.SelectedIndex == 0) //Todos
+            {
+                actualizarListBoxConArreglo(aEstudiantes, cantEstudiantes);
+                actualizarListBoxConArreglo(aPersonas, cantPersonas);
+                lCantidad.Text = $"Cantidad: {cantPersonas + cantEstudiantes}";
+            }
+            else if (cbFiltros.SelectedIndex == 1) //Estudiantes
+            {
+                actualizarListBoxConArreglo(aEstudiantes, cantEstudiantes);
+                lCantidad.Text = $"Cantidad: {cantEstudiantes}";
+            }
+            else //Personas
+            {
+                actualizarListBoxConArreglo(aPersonas, cantPersonas);
+                lCantidad.Text = $"Cantidad: {cantPersonas}";
+            }
+        }
+        private void bGuardar_Click(object sender, EventArgs e)
+        {            
+            if (!mtDni.MaskCompleted)
+            {
+                MessageBox.Show("Debe ingresar un documento VALIDO", "Advertencia",MessageBoxButtons.OK, MessageBoxIcon.Warning);              
+                errorProvider.SetError(mtDni, "Documento invalido"); mtDni.Focus();
+            }
+
+            else if (chEstudiante.Checked && !mtLegajo.MaskCompleted)
+            {
+                MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.SetError(mtLegajo, "Legajo invalido"); mtLegajo.Focus();
+            }
+            else if (!chEstudiante.Checked) actualizarOcrearPersona();
+            else actualizarOcrearEstudiante();
+
+            actualizarListBox();
         }
 
         private void bCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
+        private void cbFiltros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            actualizarListBox();
+        }
         #endregion
-
 
         #region KeyPress
         private void tNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -81,27 +165,32 @@ namespace TPherencia
                 e.Handled = true;
             }
         }
+
+        private void cbFiltros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
 
         #region Validación de campos
         private void tNombre_Leave(object sender, EventArgs e)
         {
             if (tNombre.Text.Length <= 0)
-                errorProvider.SetError(tNombre, "Debe ingresar un nombre");
+                errorProvider.SetError(tNombre, "Nombre invalido");
             else errorProvider.SetError(tNombre, "");
         }
 
         private void tApellido_Leave(object sender, EventArgs e)
         {
             if (tApellido.Text.Length <= 0)
-                errorProvider.SetError(tApellido, "Debe ingresar un apellido");
+                errorProvider.SetError(tApellido, "Apellido invalido");
             else errorProvider.SetError(tApellido, "");
         }
 
         private void mtDni_Leave(object sender, EventArgs e)
         {
             if (!mtDni.MaskCompleted)
-                errorProvider.SetError(mtDni, "Debe ingresar un documento VALIDO");
+                errorProvider.SetError(mtDni, "Documento invalido");
             else errorProvider.SetError(mtDni, "");
         }
 
@@ -110,8 +199,8 @@ namespace TPherencia
             DateTime fechaNacimiento = dtFechaNacimiento.Value;
             DateTime fechaHoy = DateTime.Today;
 
-            if (fechaNacimiento <= fechaHoy)
-                errorProvider.SetError(dtFechaNacimiento, "Debe ingresar una fecha VALIDA");
+            if (fechaNacimiento >= fechaHoy)
+                errorProvider.SetError(dtFechaNacimiento, "Fecha invalida");
             else
                 errorProvider.SetError(dtFechaNacimiento, "");
         }
@@ -119,14 +208,14 @@ namespace TPherencia
         private void mtLegajo_Leave(object sender, EventArgs e)
         {
             if (!mtLegajo.MaskCompleted)
-                errorProvider.SetError(mtLegajo, "Debe ingresar un legajo VALIDO");
+                errorProvider.SetError(mtLegajo, "Legajo invalido");
             else errorProvider.SetError(mtLegajo, "");
         }
 
         private void tCarrera_Leave(object sender, EventArgs e)
         {
             if (tCarrera.Text.Length <= 0)
-                errorProvider.SetError(tCarrera, "Debe ingresar una carrera");
+                errorProvider.SetError(tCarrera, "Carrera invalida");
             else errorProvider.SetError(tCarrera, "");
         }
 
@@ -138,14 +227,11 @@ namespace TPherencia
 
 
             if (fechaDeIngreso > fechaHoy)
-                errorProvider.SetError(dtFechaIngreso, "Debe ingresar una fecha VALIDA");
+                errorProvider.SetError(dtFechaIngreso, "Fecha invalida");
             else
                 errorProvider.SetError(dtFechaIngreso, "");
         }
+        #endregion       
 
-        
     }
-    #endregion
-
-
 }
