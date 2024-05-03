@@ -47,42 +47,56 @@ namespace TPherencia
             return i < cantEstudiantes;
         }
 
-        private bool deseaActualizar()
+        private bool deseaActualizar(Persona p)
         {
-            return MessageBox.Show("Ya está cargado ¿Desea Actualizar sus datos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            return MessageBox.Show($"Se encontró:\n\n{p.mostrar()}\n\n¿Desea actualizarlo?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
         private void actualizarOcrearPersona()
         {
-            Persona p = new Persona(mtDni.Text);            
-            bool existe = existePersona(p);
-           
-            if (existe && deseaActualizar()) //Actualizo la persona
-            {                
+            Persona p = new Persona(mtDni.Text);
+            if (existePersona(p)) //Actualizo la persona
+            {
                 int i = 0;
                 while (i < cantPersonas && !aPersonas[i].esIgual(p)) i++;
-                aPersonas[i].Nombre = tNombre.Text; aPersonas[i].Apellido = tApellido.Text;
-                aPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
+                if (deseaActualizar(aPersonas[i]))
+                {
+                    aPersonas[i].Nombre = tNombre.Text; aPersonas[i].Apellido = tApellido.Text;
+                    aPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
+                    MessageBox.Show(aPersonas[i].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
-            else if(!existe) //Creo persona                            
+            else//Creo persona 
+            {
                 aPersonas[cantPersonas++] = new Persona(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text);
+                MessageBox.Show(aPersonas[cantPersonas - 1].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void actualizarOcrearEstudiante()
         {
             Estudiante e = new Estudiante(mtDni.Text, mtLegajo.Text);
-
-            if (existeEstudiante(e) && deseaActualizar()) //Actualizo persona
+            if (existeEstudiante(e)) //Actualizo el estudiante
             {
                 int i = 0;
                 while (i < cantEstudiantes && !aEstudiantes[i].esIgual(e)) i++;
-                aEstudiantes[i].Nombre = tNombre.Text; aEstudiantes[i].Apellido = tApellido.Text;
-                aEstudiantes[i].FechaNacimiento = dtFechaNacimiento.Text;
-                aEstudiantes[i].Legajo = mtLegajo.Text; aEstudiantes[i].Carrera = tCarrera.Text;
-                aEstudiantes[i].FechaDeIngreso = dtFechaIngreso.Text;
+                if (deseaActualizar(aEstudiantes[i]))
+                {
+                    aEstudiantes[i].Nombre = tNombre.Text; aEstudiantes[i].Apellido = tApellido.Text;
+                    aEstudiantes[i].FechaNacimiento = dtFechaNacimiento.Text;
+                    aEstudiantes[i].Legajo = mtLegajo.Text; aEstudiantes[i].Carrera = tCarrera.Text;
+                    aEstudiantes[i].FechaNacimiento = dtFechaIngreso.Text;
+                    MessageBox.Show(aEstudiantes[i].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
-            else //Creo persona                            
-                aEstudiantes[cantEstudiantes++] = new Estudiante(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text,
-                    mtLegajo.Text, tCarrera.Text, dtFechaIngreso.Text);
+            else//Creo Estudiante 
+            {
+                aEstudiantes[cantEstudiantes++] = new Estudiante(mtDni.Text, tNombre.Text, tApellido.Text, dtFechaNacimiento.Text, mtLegajo.Text, tCarrera.Text, dtFechaIngreso.Text);
+                MessageBox.Show(aEstudiantes[cantEstudiantes - 1].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
         }
 
         private void actualizarListBoxConArreglo(Persona[] a, int tope)
@@ -113,10 +127,10 @@ namespace TPherencia
             }
         }
         private void bGuardar_Click(object sender, EventArgs e)
-        {            
+        {
             if (!mtDni.MaskCompleted)
             {
-                MessageBox.Show("Debe ingresar un documento VALIDO", "Advertencia",MessageBoxButtons.OK, MessageBoxIcon.Warning);              
+                MessageBox.Show("Debe ingresar un documento VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 errorProvider.SetError(mtDni, "Documento invalido"); mtDni.Focus();
             }
 

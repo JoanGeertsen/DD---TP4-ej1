@@ -186,6 +186,8 @@
             // lbPersonas
             // 
             lbPersonas.FormattingEnabled = true;
+            lbPersonas.HorizontalExtent = 450;
+            lbPersonas.HorizontalScrollbar = true;
             lbPersonas.ItemHeight = 15;
             lbPersonas.Location = new Point(12, 53);
             lbPersonas.Name = "lbPersonas";
