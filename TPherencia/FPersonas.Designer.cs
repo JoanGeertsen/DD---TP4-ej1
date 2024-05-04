@@ -293,6 +293,7 @@
             bBuscar.TabIndex = 14;
             bBuscar.Text = "Buscar";
             bBuscar.UseVisualStyleBackColor = true;
+            bBuscar.Click += bBuscar_Click;
             // 
             // bGuardar
             // 

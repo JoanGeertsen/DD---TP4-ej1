@@ -153,6 +153,32 @@ namespace TPherencia
         {
             actualizarListBox();
         }
+
+        private void bBuscar_Click(object sender, EventArgs e)
+        {
+            if (!mtDni.MaskCompleted)
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Debe ingresar un documento VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.SetError(mtDni, "Documento invalido"); mtDni.Focus();
+            }
+
+            else if (chEstudiante.Checked && !mtLegajo.MaskCompleted)
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.SetError(mtLegajo, "Legajo invalido"); mtLegajo.Focus();
+            }
+            else if (!chEstudiante.Checked)//Busco una persona
+            {
+                Persona p = new Persona(mtDni.Text);
+                int i = 0;
+                while(i < cantPersonas && !aPersonas[i].esIgual(p))                
+                    i++;
+                if (i < cantPersonas && cantPersonas > 0) MessageBox.Show($"Se encontró:\n\n{aPersonas[i].mostrar()}","Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show($"No se encontraron resultados", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
         #endregion
 
         #region KeyPress
@@ -245,7 +271,7 @@ namespace TPherencia
             else
                 errorProvider.SetError(dtFechaIngreso, "");
         }
-        #endregion       
-
+        #endregion
+       
     }
 }
