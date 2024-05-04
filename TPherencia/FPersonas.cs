@@ -64,7 +64,7 @@ namespace TPherencia
                     aPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
                     MessageBox.Show(aPersonas[i].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+                limpiarCampos();
             }
             else//Creo persona 
             {
@@ -88,7 +88,7 @@ namespace TPherencia
                     aEstudiantes[i].FechaNacimiento = dtFechaIngreso.Text;
                     MessageBox.Show(aEstudiantes[i].mostrar(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+                limpiarCampos();
             }
             else//Creo Estudiante 
             {
@@ -146,8 +146,7 @@ namespace TPherencia
             }
             else if (!chEstudiante.Checked) actualizarOcrearPersona();
             else actualizarOcrearEstudiante();
-
-            limpiarCampos();
+            
             actualizarListBox();
         }
 
