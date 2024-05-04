@@ -126,6 +126,11 @@ namespace TPherencia
                 lCantidad.Text = $"Cantidad: {cantPersonas}";
             }
         }
+        private void limpiarCampos()
+        {
+            tNombre.Clear();tApellido.Clear();mtDni.Clear(); dtFechaNacimiento.Text = "1/1/2000";
+            mtLegajo.Clear(); tCarrera.Clear(); dtFechaIngreso.Text = "1/1/2020";
+        }
         private void bGuardar_Click(object sender, EventArgs e)
         {
             if (!mtDni.MaskCompleted)
@@ -142,6 +147,7 @@ namespace TPherencia
             else if (!chEstudiante.Checked) actualizarOcrearPersona();
             else actualizarOcrearEstudiante();
 
+            limpiarCampos();
             actualizarListBox();
         }
 
