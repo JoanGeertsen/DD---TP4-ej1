@@ -57,7 +57,7 @@ namespace DD_TP3_ej1
             return base.mostrar() + $"\n Legajo: {legajo} \n{carrera}\n Fecha de ingreso: {fechaDeIngreso}";
         }
 
-        public bool esIgual(string legajo)
+        public bool esIgual(string documento, string legajo)
         {
             return this.legajo.Equals(legajo);
         }

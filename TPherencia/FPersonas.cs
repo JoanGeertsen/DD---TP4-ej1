@@ -178,6 +178,15 @@ namespace TPherencia
                 if (i < cantPersonas && cantPersonas > 0) MessageBox.Show($"Se encontró:\n\n{aPersonas[i].mostrar()}","Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else MessageBox.Show($"No se encontraron resultados", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else if (chEstudiante.Checked) //Busco un estudiante
+            {
+                Estudiante aux = new Estudiante(mtDni.Text, mtLegajo.Text); //Revisar donde esta la e global
+                int i = 0;
+                while (i < cantEstudiantes && !aEstudiantes[i].esIgual(aux))
+                    i++;
+                if (i < cantEstudiantes && cantEstudiantes > 0) MessageBox.Show($"Se encontró:\n\n{aEstudiantes[i].mostrar()}", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show($"No se encontraron resultados", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         #endregion
 
