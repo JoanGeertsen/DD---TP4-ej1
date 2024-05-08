@@ -280,7 +280,7 @@ namespace TPherencia
             DateTime fechaHoy = DateTime.Today;
 
 
-            if (fechaDeIngreso > fechaHoy)
+            if (fechaDeIngreso >= fechaHoy)
                 errorProvider.SetError(dtFechaIngreso, "Fecha invalida");
             else
                 errorProvider.SetError(dtFechaIngreso, "");

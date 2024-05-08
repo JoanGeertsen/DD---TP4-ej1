@@ -35,19 +35,19 @@ namespace DD_TP3_ej1
         public string Legajo
         {
             get { return legajo; }
-            set { legajo = (legajo.Length == 6) ? legajo: legajoPorDefecto; }
+            set { legajo = (value.Length == 6) ? value: legajoPorDefecto; }
         }
 
         public string Carrera
         {
             get { return carrera; }
-            set { carrera = (carrera != null) ? carrera : ""; }
+            set { carrera = (value != null) ? value : ""; }
         }
 
         public string FechaDeIngreso
         {
             get { return fechaDeIngreso; }
-            set { fechaDeIngreso = (fechaDeIngreso != null) ? fechaDeIngreso : ""; }
+            set { fechaDeIngreso = (value != null) ? value : ""; }
         }
         #endregion
 
