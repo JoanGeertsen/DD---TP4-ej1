@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\joang\\source\\repos\\DD TP4 ej1\\TPherencia\\DD TP3 ej1.csproj",
-      "projectName": "DD TP3 ej1",
-      "projectPath": "C:\\Users\\joang\\source\\repos\\DD TP4 ej1\\TPherencia\\DD TP3 ej1.csproj",
+      "projectUniqueName": "C:\\Users\\joang\\source\\repos\\DD TP4 ej1\\TPherencia\\DD TP4 ej1.csproj",
+      "projectName": "DD TP4 ej1",
+      "projectPath": "C:\\Users\\joang\\source\\repos\\DD TP4 ej1\\TPherencia\\DD TP4 ej1.csproj",
       "packagesPath": "C:\\Users\\joang\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\joang\\source\\repos\\DD TP4 ej1\\TPherencia\\obj\\",
       "projectStyle": "PackageReference",
