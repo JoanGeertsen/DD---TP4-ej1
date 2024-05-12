@@ -299,6 +299,7 @@
             Controls.Add(pPersona);
             Name = "FPersonas";
             Text = "Personas";
+            Load += FPersonas_Load;
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
             pLista.ResumeLayout(false);

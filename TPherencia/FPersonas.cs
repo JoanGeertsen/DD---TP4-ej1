@@ -113,5 +113,9 @@ namespace TPherencia
         }
         #endregion
 
+        private void FPersonas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
