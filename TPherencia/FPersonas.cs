@@ -145,13 +145,13 @@ namespace TPherencia
                         {
                             Empleado aux = (Empleado)listPersonas[i];
                             aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
-                            aux.Legajo = mtLegajoEmpleado.Text;
+                            aux.Legajo = mtLegajoEmpleado.Text; aux.Cargo = tCargo.Text;
                             MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else//Creo Empleado
                     {
-                        listPersonas.Add(new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, cbCarrera.Text));
+                        listPersonas.Add(new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text));
                         MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
