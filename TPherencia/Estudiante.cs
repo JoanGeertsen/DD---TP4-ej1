@@ -63,6 +63,11 @@ namespace DD_TP3_ej1
 
             return igual;
         }
+
+        public override int GetHashCode()
+        {
+            return int.Parse(dni.Replace(".", "")) * int.Parse(legajo);
+        }
         #endregion
     }
 }
