@@ -58,7 +58,7 @@ namespace DD_TP3_ej1
             else if (this.GetType() == obj.GetType())
             {
                 Estudiante e = (Estudiante)obj;
-                igual = (dni == e.dni || legajo == e.legajo);
+                igual = (dni == e.Dni || legajo == e.Legajo);
             }
 
             return igual;

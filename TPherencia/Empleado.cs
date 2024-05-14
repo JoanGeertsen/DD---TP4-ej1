@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DD_TP3_ej1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,10 +19,10 @@ namespace DD_TP4_ej1
 
         #region Constructor 
         public Empleado(string documento, string nombre, string fechaNacimiento,
-            string legajo, string carrera, string fechaDeIngreso) : base(documento, nombre, fechaNacimiento)
+            string legajo, string cargo) : base(documento, nombre, fechaNacimiento)
         {
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
-            this.cargo = (carrera != null) ? carrera : "";
+            this.cargo = (cargo != null) ? cargo : "";
         }
         #endregion
 
@@ -45,9 +47,19 @@ namespace DD_TP4_ej1
             return base.ToString() + $"Cargo: {cargo} Legajo: {Legajo} ";
         }
 
-        public bool esIgual(Empleado empleado)
+        public override bool Equals(Object obj)
         {
-            return (Legajo == empleado.Legajo);
+            bool igual = false;
+
+            if (obj == null)
+                igual = (this == null);
+            else if (this.GetType() == obj.GetType())
+            {
+                Empleado e = (Empleado)obj;
+                igual = (dni == e.Dni && legajo == e.Legajo);
+            }
+
+            return igual;
 
         }
         #endregion
