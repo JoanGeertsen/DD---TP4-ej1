@@ -71,6 +71,12 @@ namespace TPherencia
             lCantidad.Text = $"Cantidad: {lbPersonas.Items.Count}";
         }
 
+        private void chequearCarrera()
+        {
+            if (!cbCarrera.Items.Contains(cbCarrera.Text))     
+                cbCarrera.Items.Add(cbCarrera.Text);               
+        }
+
         private void bGuardar_Click(object sender, EventArgs e)
         {
             if (!mtDni.MaskCompleted)
@@ -112,12 +118,14 @@ namespace TPherencia
                             aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
                             aux.Legajo = mtLegajo.Text;
                             MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            chequearCarrera();
                         }
                     }
                     else//Creo Eastudiante
                     {
                         listPersonas.Add(new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text));
                         MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        chequearCarrera();
                     }
                 }                
             }
