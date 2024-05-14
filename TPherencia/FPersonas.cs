@@ -56,17 +56,17 @@ namespace TPherencia
         private void actualizarListBox()
         {
             lbPersonas.Items.Clear();
-            Type t = typeof(Persona); 
+            int selectedIndex = cbFiltros.SelectedIndex;
 
-            if (cbFiltros.SelectedIndex == 1) //Estudiantes            
-                t = typeof(Estudiante); 
-          
-            else if (cbFiltros.SelectedIndex == 2) //Empleado
-                t = typeof(Empleado);
-
-            foreach(Persona p in listPersonas)            
-                if (p.GetType() == t)
+            foreach (Persona p in listPersonas)
+            {
+                if ((selectedIndex == 1 && p is Estudiante) ||
+                    (selectedIndex == 2 && p is Empleado) ||
+                    (selectedIndex != 1 && selectedIndex != 2 && p is Persona))
+                {
                     lbPersonas.Items.Add(p.ToString());
+                }
+            }
 
             lCantidad.Text = $"Cantidad: {lbPersonas.Items.Count}";
         }
