@@ -10,8 +10,7 @@ namespace DD_TP3_ej1
     {
         #region Atributos
         private string legajo;
-        private string carrera;
-        private string fechaDeIngreso;
+        private string carrera; 
         private static string legajoPorDefecto = "444444";
         #endregion
 
@@ -19,15 +18,14 @@ namespace DD_TP3_ej1
         public Estudiante(string documento, string legajo) : base(documento)
         {
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
-            carrera = ""; fechaDeIngreso = "";
+            carrera = "";
         }
 
-        public Estudiante(string documento, string nombre, string apellido, string fechaNacimiento,
-            string legajo, string carrera, string fechaDeIngreso) : base(documento, nombre, apellido, fechaNacimiento)
+        public Estudiante(string documento, string nombre, string fechaNacimiento,
+            string legajo, string carrera) : base(documento, nombre, fechaNacimiento)
         {
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
-            this.carrera = (carrera != null) ? carrera : "";
-            this.fechaDeIngreso = (fechaDeIngreso != null) ? fechaDeIngreso : "";
+            this.carrera = (carrera != null) ? carrera : "";            
         }
         #endregion
 
@@ -42,24 +40,28 @@ namespace DD_TP3_ej1
         {
             get { return carrera; }
             set { carrera = (value != null) ? value : ""; }
-        }
-
-        public string FechaDeIngreso
-        {
-            get { return fechaDeIngreso; }
-            set { fechaDeIngreso = (value != null) ? value : ""; }
-        }
+        }     
         #endregion
 
         #region Consultas
-        public string mostrar()
+        public override string ToString()
         {
-            return base.mostrar() + $"\n Legajo: {legajo} \n{carrera}\n Fecha de ingreso: {fechaDeIngreso}";
+            return base.ToString() + $"\n Legajo: {legajo} \n{carrera}";
         }
 
-        public bool esIgual(string documento, string legajo)
+        public override bool Equals(Object obj)
         {
-            return this.legajo.Equals(legajo);
+            bool igual = false;
+
+            if (obj == null)
+                igual = (this == null);
+            else if (this.GetType() == obj.GetType())
+            {
+                Estudiante e = (Estudiante)obj;
+                igual = (dni == e.dni || legajo == e.legajo);
+            }
+
+            return igual;
         }
         #endregion
     }

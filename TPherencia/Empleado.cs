@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DD_TP4_ej1
 {
-    internal class Empleado: Estudiante
+    internal class Empleado: Persona
     {
         #region Atributos
         private string legajo;
@@ -16,8 +16,8 @@ namespace DD_TP4_ej1
         #endregion
 
         #region Constructor 
-        public Empleado(string documento, string nombre, string apellido, string fechaNacimiento,
-            string legajo, string carrera, string fechaDeIngreso) : base(documento, nombre, apellido, fechaNacimiento)
+        public Empleado(string documento, string nombre, string fechaNacimiento,
+            string legajo, string carrera, string fechaDeIngreso) : base(documento, nombre, fechaNacimiento)
         {
             this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
             this.cargo = (carrera != null) ? carrera : "";
