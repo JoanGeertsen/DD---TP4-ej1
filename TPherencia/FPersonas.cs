@@ -1,4 +1,5 @@
 using DD_TP3_ej1;
+using DD_TP4_ej1;
 using System.Windows.Forms;
 
 namespace TPherencia
@@ -16,20 +17,36 @@ namespace TPherencia
         }
 
         #region Funcionalidades
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
 
+        private void rbPersona_CheckedChanged(object sender, EventArgs e)
+        {
+            pEstudiante.Visible = false; pEmpleado.Visible = false;
         }
 
-        private bool existePersona(Persona p)
+        private void rbEstudiante_CheckedChanged(object sender, EventArgs e)
         {
-            return true;
+            pEstudiante.Visible = true; pEmpleado.Visible = false;
         }
 
-        private bool existeEstudiante(Estudiante e)
+        private void rbEmpleado_CheckedChanged(object sender, EventArgs e)
         {
-            return true;
+            pEstudiante.Visible = false; pEmpleado.Visible = true;
         }
+
+        private bool existePersona(Persona p, out int i)
+        {
+            bool encontre = false; i = 0;
+
+            while (!encontre && i < listPersonas.Count)
+            {
+                if (listPersonas[i].Equals(p))
+                    encontre = true;
+                else
+                    i++;
+            }
+            return encontre;
+        }
+
 
         private bool deseaActualizar(Persona p)
         {
@@ -43,7 +60,80 @@ namespace TPherencia
 
         private void bGuardar_Click(object sender, EventArgs e)
         {
+            if (!mtDni.MaskCompleted)
+            {
+                MessageBox.Show("Debe ingresar un DNI VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");
 
+            }
+            else if (rbPersona.Checked)
+            {
+                if (existePersona(new Persona(mtDni.Text), out int i))//Actualizo Persona
+                {
+                    if (deseaActualizar(listPersonas[i]))
+                    {
+                        listPersonas[i].Nombre = tNombre.Text; listPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
+                        MessageBox.Show(listPersonas[i].ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else//Creo Persona
+                {
+                    listPersonas.Add(new Persona(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text));
+                    MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (rbEstudiante.Checked)
+            {
+                if (!mtLegajo.MaskCompleted)
+                {
+                    MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");
+                }
+                else
+                {
+                    if (existePersona(new Estudiante(mtDni.Text, mtLegajo.Text), out int i))//Actualizo Estudiante
+                    {
+                        if (deseaActualizar(listPersonas[i]))
+                        {
+                            Estudiante aux = (Estudiante)listPersonas[i];
+                            aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
+                            aux.Legajo = mtLegajo.Text;
+                            MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else//Creo Eastudiante
+                    {
+                        listPersonas.Add(new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text));
+                        MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            else if (rbEmpleado.Checked)
+            {
+                if (!mtLegajoEmpleado.MaskCompleted)
+                {
+                    MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");
+                }
+                else
+                {
+                    if (existePersona(new Empleado(mtDni.Text, mtLegajoEmpleado.Text), out int i))//Actualizo Empleado
+                    {
+                        if (deseaActualizar(listPersonas[i]))
+                        {
+                            Empleado aux = (Empleado)listPersonas[i];
+                            aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
+                            aux.Legajo = mtLegajoEmpleado.Text;
+                            MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else//Creo Empleado
+                    {
+                        listPersonas.Add(new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, cbCarrera.Text));
+                        MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
         }
 
         private void cbFiltros_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,6 +203,6 @@ namespace TPherencia
             else errorProvider.SetError(cbCarrera, "");
         }
         #endregion
-        
+
     }
 }

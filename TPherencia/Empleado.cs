@@ -48,7 +48,7 @@ namespace DD_TP4_ej1
         public override string ToString()
         {
 
-            return base.ToString() + $"Cargo: {cargo} Legajo: {Legajo} ";
+            return base.ToString() + $"\n Cargo: {cargo} \n Legajo: {Legajo} ";
         }
 
         public override bool Equals(Object obj)

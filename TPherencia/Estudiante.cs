@@ -46,7 +46,7 @@ namespace DD_TP3_ej1
         #region Consultas
         public override string ToString()
         {
-            return base.ToString() + $"\n Legajo: {legajo} \n{carrera}";
+            return base.ToString() + $"\n Legajo: {legajo} \n Carrera: {carrera}";
         }
 
         public override bool Equals(Object obj)
