@@ -14,7 +14,7 @@ namespace DD_TP4_ej1
         #region Atributos
         private string legajo;
         private string cargo;
-        private static string legajoPorDefecto = "444444";
+        public static string legajoPorDefecto = "444444";
         #endregion
 
         #region Constructor 
@@ -37,7 +37,7 @@ namespace DD_TP4_ej1
             set { legajo = (value.Length == 6) ? value : legajoPorDefecto; }
         }
 
-        public string Carrera
+        public string Cargo
         {
             get { return cargo; }
             set { cargo = (value != null) ? value : ""; }
@@ -60,7 +60,7 @@ namespace DD_TP4_ej1
             else if (this.GetType() == obj.GetType())
             {
                 Empleado e = (Empleado)obj;
-                igual = (dni == e.Dni && legajo == e.Legajo);
+                igual = (dni == e.Dni || legajo == e.Legajo);
             }
 
             return igual;

@@ -271,6 +271,7 @@
             bMostrar.TabIndex = 14;
             bMostrar.Text = "Mostrar";
             bMostrar.UseVisualStyleBackColor = true;
+            bMostrar.Click += bMostrar_Click;
             // 
             // bGuardar
             // 

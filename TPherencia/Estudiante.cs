@@ -11,7 +11,7 @@ namespace DD_TP3_ej1
         #region Atributos
         private string legajo;
         private string carrera; 
-        private static string legajoPorDefecto = "444444";
+        public static string legajoPorDefecto = "444444";
         #endregion
 
         #region Constructores

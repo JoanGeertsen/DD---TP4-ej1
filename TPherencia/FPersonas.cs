@@ -1,5 +1,6 @@
 using DD_TP3_ej1;
 using DD_TP4_ej1;
+using System;
 using System.Windows.Forms;
 
 namespace TPherencia
@@ -73,8 +74,8 @@ namespace TPherencia
 
         private void chequearCarrera()
         {
-            if (!cbCarrera.Items.Contains(cbCarrera.Text))     
-                cbCarrera.Items.Add(cbCarrera.Text);               
+            if (!cbCarrera.Items.Contains(cbCarrera.Text))
+                cbCarrera.Items.Add(cbCarrera.Text);
         }
 
         private void bGuardar_Click(object sender, EventArgs e)
@@ -127,7 +128,7 @@ namespace TPherencia
                         MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         chequearCarrera();
                     }
-                }                
+                }
             }
             else if (rbEmpleado.Checked)
             {
@@ -162,10 +163,41 @@ namespace TPherencia
         {
             actualizarListBox();
         }
+
+        private void bMostrar_Click(object sender, EventArgs e)
+        {
+            int i=0;         
+            if (!mtDni.MaskCompleted)
+            {
+                MessageBox.Show("Debe ingresar un DNI valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido"); mtDni.Focus();
+            }
+            else if(existePersona(new Persona(mtDni.Text), out i))
+            {
+                Persona pe = listPersonas[i]; rbPersona.Checked = true;
+                tNombre.Text = pe.Nombre; dtFechaNacimiento.Text = pe.FechaNacimiento; 
+            }
+            else if (existePersona(new Estudiante(mtDni.Text, Estudiante.legajoPorDefecto), out i))
+            {
+                Estudiante es = (Estudiante) listPersonas[i]; rbEstudiante.Checked = true;
+                tNombre.Text = es.Nombre; dtFechaNacimiento.Text = es.FechaNacimiento; 
+                mtLegajo.Text = es.Legajo; cbCarrera.Text = es.Carrera;
+            }
+            else if (existePersona(new Empleado(mtDni.Text, Empleado.legajoPorDefecto), out i))
+            {
+                Empleado em = (Empleado)listPersonas[i]; rbEmpleado.Checked = true;
+                tNombre.Text = em.Nombre; dtFechaNacimiento.Text = em.FechaNacimiento; 
+                mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
+            }
+
+
+            else           
+                MessageBox.Show($"No se encontraron resultados", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void bCerrar_Click(object sender, EventArgs e)
         {
             Close();
-        }
+        }       
         #endregion
 
         #region KeyPress
@@ -224,7 +256,6 @@ namespace TPherencia
                 errorProvider.SetError(mtLegajo, "Carrera inválida");
             else errorProvider.SetError(cbCarrera, "");
         }
-        #endregion
-
+        #endregion        
     }
 }
