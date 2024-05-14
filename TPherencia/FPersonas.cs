@@ -55,7 +55,19 @@ namespace TPherencia
 
         private void actualizarListBox()
         {
+            lbPersonas.Items.Clear();
+            Type t = typeof(Persona);
 
+            if (cbFiltros.SelectedIndex == 1) //Estudiantes
+                t = typeof(Estudiante);
+            else if (cbFiltros.SelectedIndex == 2) //Empleado
+                t = typeof(Empleado);
+
+            foreach(Persona p in listPersonas)
+            {
+                if (p.GetType() == t)
+                    lbPersonas.Items.Add(p.ToString());
+            }
         }
 
         private void bGuardar_Click(object sender, EventArgs e)
@@ -106,7 +118,7 @@ namespace TPherencia
                         listPersonas.Add(new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text));
                         MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
+                }                
             }
             else if (rbEmpleado.Checked)
             {
@@ -134,6 +146,7 @@ namespace TPherencia
                     }
                 }
             }
+            actualizarListBox();
         }
 
         private void cbFiltros_SelectedIndexChanged(object sender, EventArgs e)

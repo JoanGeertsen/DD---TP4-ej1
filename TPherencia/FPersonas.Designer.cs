@@ -206,7 +206,7 @@
             // 
             cbFiltros.DropDownStyle = ComboBoxStyle.DropDownList;
             cbFiltros.FormattingEnabled = true;
-            cbFiltros.Items.AddRange(new object[] { "TODOS", "Estudiantes", "NO Estudiantes" });
+            cbFiltros.Items.AddRange(new object[] { "Personas (TODOS)", "Estudiantes", "Empleados" });
             cbFiltros.Location = new Point(12, 10);
             cbFiltros.Name = "cbFiltros";
             cbFiltros.Size = new Size(170, 23);
