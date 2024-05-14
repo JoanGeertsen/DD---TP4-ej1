@@ -7,14 +7,12 @@ namespace TPherencia
     {
         #region Atributos
         private List<Persona> listPersonas;
-        private int cantPersonas;
         #endregion
 
         public FPersonas()
         {
             InitializeComponent();
             listPersonas = new List<Persona>();
-            cantPersonas = 0;
         }
 
         #region Funcionalidades
@@ -35,7 +33,7 @@ namespace TPherencia
 
         private bool deseaActualizar(Persona p)
         {
-            return MessageBox.Show($"Se encontró:\n\n{p.mostrar()}\n\n¿Desea actualizarlo?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            return MessageBox.Show($"Se encontró:\n\n{p.ToString()}\n\n¿Desea actualizarlo?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
         private void actualizarListBox()
@@ -67,19 +65,12 @@ namespace TPherencia
             }
         }
 
-        private void tCarrera_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Back)
-            {
-                e.Handled = true;
-            }
-        }
         #endregion
 
         #region Validación de campos
         private void tNombre_Leave(object sender, EventArgs e)
         {
-            if (tNombre.Text.Length <= 0)
+            if (tNombre.Text.Trim() == "")
                 errorProvider.SetError(tNombre, "Nombre invalido");
             else errorProvider.SetError(tNombre, "");
         }
@@ -108,13 +99,12 @@ namespace TPherencia
                 errorProvider.SetError(mtLegajo, "Legajo invalido");
             else errorProvider.SetError(mtLegajo, "");
         }
-
-        private void tCarrera_Leave(object sender, EventArgs e)
+        private void cbCarrera_Leave(object sender, EventArgs e)
         {
-            if (tCarrera.Text.Length <= 0)
-                errorProvider.SetError(tCarrera, "Carrera invalida");
-            else errorProvider.SetError(tCarrera, "");
+            if(cbCarrera.Text.Trim() == "")
+                errorProvider.SetError(mtLegajo, "Carrera inválida");
+            else errorProvider.SetError(cbCarrera, "");
         }
-        #endregion            
+        #endregion       
     }
 }

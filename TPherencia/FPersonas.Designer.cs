@@ -44,7 +44,7 @@
             lbPersonas = new ListBox();
             cbFiltros = new ComboBox();
             pEstudiante = new Panel();
-            tCarrera = new TextBox();
+            cbCarrera = new ComboBox();
             label7 = new Label();
             mtLegajo = new MaskedTextBox();
             label6 = new Label();
@@ -207,7 +207,7 @@
             // pEstudiante
             // 
             pEstudiante.BackColor = Color.PaleGreen;
-            pEstudiante.Controls.Add(tCarrera);
+            pEstudiante.Controls.Add(cbCarrera);
             pEstudiante.Controls.Add(label7);
             pEstudiante.Controls.Add(mtLegajo);
             pEstudiante.Controls.Add(label6);
@@ -217,19 +217,19 @@
             pEstudiante.TabIndex = 13;
             pEstudiante.Visible = false;
             // 
-            // tCarrera
+            // cbCarrera
             // 
-            tCarrera.Location = new Point(98, 41);
-            tCarrera.Name = "tCarrera";
-            tCarrera.Size = new Size(181, 23);
-            tCarrera.TabIndex = 10;
-            tCarrera.KeyPress += tCarrera_KeyPress;
-            tCarrera.Leave += tCarrera_Leave;
+            cbCarrera.FormattingEnabled = true;
+            cbCarrera.Location = new Point(98, 41);
+            cbCarrera.Name = "cbCarrera";
+            cbCarrera.Size = new Size(189, 23);
+            cbCarrera.TabIndex = 12;
+            cbCarrera.Leave += cbCarrera_Leave;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(44, 49);
+            label7.Location = new Point(44, 45);
             label7.Name = "label7";
             label7.Size = new Size(48, 15);
             label7.TabIndex = 11;
@@ -298,7 +298,7 @@
             Controls.Add(pLista);
             Controls.Add(pPersona);
             Name = "FPersonas";
-            Text = "Personas";    
+            Text = "Personas";
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
             pLista.ResumeLayout(false);
@@ -324,7 +324,6 @@
         private Panel pEstudiante;
         private Label label6;
         private Label lCantidad;
-        private TextBox tCarrera;
         private Label label7;
         private MaskedTextBox mtLegajo;
         private Button bMostrar;
@@ -334,5 +333,6 @@
         private RadioButton rbEmpleado;
         private RadioButton rbEstudiante;
         private RadioButton rbPersona;
+        private ComboBox cbCarrera;
     }
 }
