@@ -1,6 +1,7 @@
 using DD_TP3_ej1;
 using DD_TP4_ej1;
 using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace TPherencia
@@ -36,19 +37,18 @@ namespace TPherencia
 
         private bool existePersona(Persona p, out int i)
         {
-            bool encontre = false; i = 0;
+            bool encontre = false;
+            i = 0;
 
             while (!encontre && i < listPersonas.Count)
             {
-                if (listPersonas[i].Equals(p))
-                    encontre = true;
-                else
-                    i++;
+                if (listPersonas[i] is Persona persona && persona.Dni == p.Dni)                
+                    encontre = true;                
+                else                
+                    i++;                
             }
             return encontre;
         }
-
-
         private bool deseaActualizar(Persona p)
         {
             return MessageBox.Show($"Se encontró:\n\n{p.ToString()}\n\n¿Desea actualizarlo?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
