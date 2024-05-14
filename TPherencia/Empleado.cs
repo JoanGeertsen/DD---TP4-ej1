@@ -18,6 +18,10 @@ namespace DD_TP4_ej1
         #endregion
 
         #region Constructor 
+        public Empleado(string documento, string legajo) : base(documento)
+        {
+            this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;          
+        }
         public Empleado(string documento, string nombre, string fechaNacimiento,
             string legajo, string cargo) : base(documento, nombre, fechaNacimiento)
         {
