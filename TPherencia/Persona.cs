@@ -1,77 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-
-namespace DD_TP3_ej1
-{    
+﻿namespace DD_TP3_ej1
+{
     internal class Persona
     {
         #region Atributos
         protected string nombre;
-        protected string apellido;
-        protected string documento;
+        protected string dni;
         protected string fechaNacimiento;
-        private static string documentoPorDefecto="44.444.444";
+        private static string dniPorDefecto = "44.444.444";
         #endregion
 
         #region Constructores
-        public Persona(string documento) 
+        public Persona(string dni)
         {
-            this.documento = (documento.Length == 10) ? documento: documentoPorDefecto;
-            nombre = ""; apellido = ""; fechaNacimiento="";
+            this.dni = (dni.Length == 10) ? dni : dniPorDefecto;
+            nombre = ""; fechaNacimiento = "";
         }
 
-        public Persona(String documento, string nombre, string apellido, string fechaNacimiento) 
+        public Persona(string dni, string nombre, string fechaNacimiento)
         { //Las comprobaciones son temporales, hay que cambiarlas
-            this.documento = (documento.Length == 10) ? documento : documentoPorDefecto;
-            this.nombre = (nombre!=null) ? nombre : "";
-            this.apellido = (apellido != null) ? apellido : "";
+            this.dni = (dni.Length == 10) ? dni : dniPorDefecto;
+            this.nombre = (nombre != null) ? nombre : "";        
             this.fechaNacimiento = (fechaNacimiento != null) ? fechaNacimiento : "";
         }
         #endregion
 
         #region Property
-        public string Documento
+        public string Dni
         {
-            get { return documento; }
-            set { documento = (value.Length == 10) ? value : documentoPorDefecto; }
+            get { return dni; }
+            set { dni = (value.Length == 10) ? value : dniPorDefecto; }
         }
 
         public string Nombre
         {
             get { return nombre; }
             set { nombre = (value != null) ? value : ""; }
-        }
-
-        public string Apellido
-        {
-            get { return apellido; }
-            set { apellido = (value != null) ? value : ""; }
-        }
+        }    
 
         public string FechaNacimiento
         {
             get { return fechaNacimiento; }
             set { fechaNacimiento = (value != null) ? value : ""; }
         }
-        #endregion
-
-        #region Static       
-        #endregion
+        #endregion       
 
         #region Consultas
-        public string mostrar()
+        public override string ToString()
         {
-            return $" {nombre}, {apellido}\n Documento: {documento}\n Fecha de nacimiento: {fechaNacimiento}";
+            return $" {nombre}\n DNI: {dni}\n Fecha de nacimiento: {fechaNacimiento}";
         }
 
-        public bool esIgual(Persona p)
+        public override bool Equals(Object obj)
         {
-            return documento.Equals(p.Documento);
+            bool igual = false;
+
+            if (obj == null)
+                igual = (this == null);
+            else if (this.GetType() == obj.GetType())
+            {
+                Persona p = (Persona) obj;
+                igual = (dni == p.Dni);
+            }
+
+            return igual;
+        }
+
+        public override int GetHashCode()
+        {
+            return int.Parse(dni.Replace(".", ""));
         }
         #endregion
     }

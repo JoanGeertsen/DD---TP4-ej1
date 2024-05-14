@@ -82,13 +82,13 @@
             rbEmpleado.Name = "rbEmpleado";
             rbEmpleado.Size = new Size(78, 19);
             rbEmpleado.TabIndex = 11;
-            rbEmpleado.TabStop = true;
             rbEmpleado.Text = "Empleado";
             rbEmpleado.UseVisualStyleBackColor = true;
             // 
             // rbEstudiante
             // 
             rbEstudiante.AutoSize = true;
+            rbEstudiante.Checked = true;
             rbEstudiante.Location = new Point(112, 108);
             rbEstudiante.Name = "rbEstudiante";
             rbEstudiante.Size = new Size(80, 19);
@@ -104,7 +104,6 @@
             rbPersona.Name = "rbPersona";
             rbPersona.Size = new Size(67, 19);
             rbPersona.TabIndex = 9;
-            rbPersona.TabStop = true;
             rbPersona.Text = "Persona";
             rbPersona.UseVisualStyleBackColor = true;
             // 
@@ -281,6 +280,7 @@
             bCerrar.TabIndex = 16;
             bCerrar.Text = "Cerrar";
             bCerrar.UseVisualStyleBackColor = true;
+            bCerrar.Click += bCerrar_Click;
             // 
             // errorProvider
             // 
@@ -298,8 +298,7 @@
             Controls.Add(pLista);
             Controls.Add(pPersona);
             Name = "FPersonas";
-            Text = "Personas";
-            Load += FPersonas_Load;
+            Text = "Personas";    
             pPersona.ResumeLayout(false);
             pPersona.PerformLayout();
             pLista.ResumeLayout(false);

@@ -52,6 +52,10 @@ namespace TPherencia
         {
             actualizarListBox();
         }
+        private void bCerrar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
         #endregion
 
         #region KeyPress
@@ -111,11 +115,6 @@ namespace TPherencia
                 errorProvider.SetError(tCarrera, "Carrera invalida");
             else errorProvider.SetError(tCarrera, "");
         }
-        #endregion
-
-        private void FPersonas_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion            
     }
 }
