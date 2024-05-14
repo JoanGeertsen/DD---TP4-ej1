@@ -1,6 +1,6 @@
 ﻿namespace DD_TP3_ej1
 {
-    internal class Persona
+    internal class Persona : IComparable<Persona> //Asumo que podemos usar el comparador para aprovechar la Lista
     {
         #region Atributos
         protected string nombre;
@@ -70,5 +70,18 @@
             return int.Parse(dni.Replace(".", ""));
         }
         #endregion
+
+        public int CompareTo(Persona other)
+        {
+            if (other == null)
+            {
+                return 1; // Si la otra persona es nula, la actual es mayor
+            }
+            else
+            {
+                // Comparamos las personas por su DNI
+                return this.Dni.CompareTo(other.Dni);
+            }
+        }
     }
 }

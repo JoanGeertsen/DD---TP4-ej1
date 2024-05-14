@@ -48,20 +48,20 @@
             label7 = new Label();
             mtLegajo = new MaskedTextBox();
             label6 = new Label();
-            bMostrar = new Button();
-            bGuardar = new Button();
-            bCerrar = new Button();
-            errorProvider = new ErrorProvider(components);
             pEmpleado = new Panel();
             tCargo = new TextBox();
             label2 = new Label();
             mtLegajoEmpleado = new MaskedTextBox();
             label5 = new Label();
+            bMostrar = new Button();
+            bGuardar = new Button();
+            bCerrar = new Button();
+            errorProvider = new ErrorProvider(components);
             pPersona.SuspendLayout();
             pLista.SuspendLayout();
             pEstudiante.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             pEmpleado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // pPersona
@@ -194,7 +194,7 @@
             // lbPersonas
             // 
             lbPersonas.FormattingEnabled = true;
-            lbPersonas.HorizontalExtent = 450;
+            lbPersonas.HorizontalExtent = 700;
             lbPersonas.HorizontalScrollbar = true;
             lbPersonas.ItemHeight = 15;
             lbPersonas.Location = new Point(12, 39);
@@ -263,6 +263,54 @@
             label6.TabIndex = 10;
             label6.Text = "Legajo:";
             // 
+            // pEmpleado
+            // 
+            pEmpleado.BackColor = Color.PaleGreen;
+            pEmpleado.Controls.Add(tCargo);
+            pEmpleado.Controls.Add(label2);
+            pEmpleado.Controls.Add(mtLegajoEmpleado);
+            pEmpleado.Controls.Add(label5);
+            pEmpleado.Location = new Point(12, 154);
+            pEmpleado.Name = "pEmpleado";
+            pEmpleado.Size = new Size(307, 78);
+            pEmpleado.TabIndex = 17;
+            pEmpleado.Visible = false;
+            // 
+            // tCargo
+            // 
+            tCargo.Location = new Point(98, 37);
+            tCargo.Name = "tCargo";
+            tCargo.Size = new Size(167, 23);
+            tCargo.TabIndex = 12;
+            tCargo.Leave += tCargo_Leave;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(44, 45);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Cargo:";
+            // 
+            // mtLegajoEmpleado
+            // 
+            mtLegajoEmpleado.Location = new Point(98, 8);
+            mtLegajoEmpleado.Mask = "000000";
+            mtLegajoEmpleado.Name = "mtLegajoEmpleado";
+            mtLegajoEmpleado.Size = new Size(81, 23);
+            mtLegajoEmpleado.TabIndex = 10;
+            mtLegajoEmpleado.Leave += mtLegajoEmpleado_Leave;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(47, 11);
+            label5.Name = "label5";
+            label5.Size = new Size(45, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Legajo:";
+            // 
             // bMostrar
             // 
             bMostrar.Location = new Point(12, 238);
@@ -297,57 +345,11 @@
             // 
             errorProvider.ContainerControl = this;
             // 
-            // pEmpleado
-            // 
-            pEmpleado.BackColor = Color.PaleGreen;
-            pEmpleado.Controls.Add(tCargo);
-            pEmpleado.Controls.Add(label2);
-            pEmpleado.Controls.Add(mtLegajoEmpleado);
-            pEmpleado.Controls.Add(label5);
-            pEmpleado.Location = new Point(545, 70);
-            pEmpleado.Name = "pEmpleado";
-            pEmpleado.Size = new Size(307, 78);
-            pEmpleado.TabIndex = 17;
-            pEmpleado.Visible = false;
-            // 
-            // tCargo
-            // 
-            tCargo.Location = new Point(98, 37);
-            tCargo.Name = "tCargo";
-            tCargo.Size = new Size(167, 23);
-            tCargo.TabIndex = 12;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(44, 45);
-            label2.Name = "label2";
-            label2.Size = new Size(42, 15);
-            label2.TabIndex = 11;
-            label2.Text = "Cargo:";
-            // 
-            // mtLegajoEmpleado
-            // 
-            mtLegajoEmpleado.Location = new Point(98, 8);
-            mtLegajoEmpleado.Mask = "000000";
-            mtLegajoEmpleado.Name = "mtLegajoEmpleado";
-            mtLegajoEmpleado.Size = new Size(81, 23);
-            mtLegajoEmpleado.TabIndex = 10;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(47, 11);
-            label5.Name = "label5";
-            label5.Size = new Size(45, 15);
-            label5.TabIndex = 10;
-            label5.Text = "Legajo:";
-            // 
             // FPersonas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(876, 271);
+            ClientSize = new Size(529, 272);
             Controls.Add(pEmpleado);
             Controls.Add(bCerrar);
             Controls.Add(bGuardar);
@@ -363,9 +365,9 @@
             pLista.PerformLayout();
             pEstudiante.ResumeLayout(false);
             pEstudiante.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             pEmpleado.ResumeLayout(false);
             pEmpleado.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
         }
 
