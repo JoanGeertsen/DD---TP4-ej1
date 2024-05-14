@@ -224,6 +224,7 @@
             cbCarrera.Name = "cbCarrera";
             cbCarrera.Size = new Size(189, 23);
             cbCarrera.TabIndex = 12;
+            cbCarrera.KeyPress += cbCarrera_KeyPress;
             cbCarrera.Leave += cbCarrera_Leave;
             // 
             // label7

@@ -64,6 +64,13 @@ namespace TPherencia
                 e.Handled = true;
             }
         }
+        private void cbCarrera_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+        }
 
         #endregion
 
@@ -101,10 +108,11 @@ namespace TPherencia
         }
         private void cbCarrera_Leave(object sender, EventArgs e)
         {
-            if(cbCarrera.Text.Trim() == "")
+            if (cbCarrera.Text.Trim() == "")
                 errorProvider.SetError(mtLegajo, "Carrera inválida");
             else errorProvider.SetError(cbCarrera, "");
         }
-        #endregion       
+        #endregion
+        
     }
 }
