@@ -175,29 +175,41 @@ namespace TPherencia
 
         private void bMostrar_Click(object sender, EventArgs e)
         {
-            int i = 0; errorProvider.Clear();
+            int i = 0; errorProvider.Clear(); 
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido"); mtDni.Focus();
             }
             else if (existePersona(new Persona(mtDni.Text), out i))
-            {
-                Persona pe = listPersonas[i]; rbPersona.Checked = true;
-                tNombre.Text = pe.Nombre; dtFechaNacimiento.Text = pe.FechaNacimiento;
-            }
+            { 
+                Persona pe = listPersonas[i];
+                tNombre.Text = pe.Nombre; dtFechaNacimiento.Text = pe.FechaNacimiento; rbPersona.Checked = true;
+                if (pe.GetType() == typeof(Estudiante))
+                {
+                    Estudiante es = (Estudiante) pe; rbEstudiante.Checked = true;
+                    mtLegajo.Text = es.Legajo; cbCarrera.Text = es.Carrera;
+                }
+                else if (pe.GetType() == typeof(Empleado))
+                {
+                    Empleado em = (Empleado) pe; rbEmpleado.Checked = true;
+                    mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
+                }
+
+
+            }/*
             else if (existePersona(new Estudiante(mtDni.Text, Estudiante.legajoPorDefecto), out i))
             {
                 Estudiante es = (Estudiante)listPersonas[i]; rbEstudiante.Checked = true;
                 tNombre.Text = es.Nombre; dtFechaNacimiento.Text = es.FechaNacimiento;
-                mtLegajo.Text = es.Legajo; cbCarrera.Text = es.Carrera;
+                
             }
             else if (existePersona(new Empleado(mtDni.Text, Empleado.legajoPorDefecto), out i))
             {
                 Empleado em = (Empleado)listPersonas[i]; rbEmpleado.Checked = true;
                 tNombre.Text = em.Nombre; dtFechaNacimiento.Text = em.FechaNacimiento;
                 mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
-            }
+            }*/
 
 
             else
