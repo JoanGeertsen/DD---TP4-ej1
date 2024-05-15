@@ -82,7 +82,7 @@ namespace TPherencia
 
         private void limpiarCampos()
         {
-            tNombre.Clear(); mtDni.Clear(); dtFechaNacimiento.ResetText();
+            tNombre.Clear(); mtDni.Clear(); dtFechaNacimiento.Text="01/01/2000";
             mtLegajo.Clear(); cbCarrera.Text = "";
             mtLegajoEmpleado.Clear(); tCargo.Clear();
         }
@@ -195,22 +195,7 @@ namespace TPherencia
                     Empleado em = (Empleado) pe; rbEmpleado.Checked = true;
                     mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
                 }
-
-
-            }/*
-            else if (existePersona(new Estudiante(mtDni.Text, Estudiante.legajoPorDefecto), out i))
-            {
-                Estudiante es = (Estudiante)listPersonas[i]; rbEstudiante.Checked = true;
-                tNombre.Text = es.Nombre; dtFechaNacimiento.Text = es.FechaNacimiento;
-                
             }
-            else if (existePersona(new Empleado(mtDni.Text, Empleado.legajoPorDefecto), out i))
-            {
-                Empleado em = (Empleado)listPersonas[i]; rbEmpleado.Checked = true;
-                tNombre.Text = em.Nombre; dtFechaNacimiento.Text = em.FechaNacimiento;
-                mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
-            }*/
-
 
             else
                 MessageBox.Show($"No se encontraron resultados", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
