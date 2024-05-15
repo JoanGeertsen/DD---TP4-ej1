@@ -229,6 +229,7 @@
             // cbCarrera
             // 
             cbCarrera.FormattingEnabled = true;
+            cbCarrera.Items.AddRange(new object[] { "Técnico en Computación", "Contador" });
             cbCarrera.Location = new Point(98, 41);
             cbCarrera.Name = "cbCarrera";
             cbCarrera.Size = new Size(189, 23);

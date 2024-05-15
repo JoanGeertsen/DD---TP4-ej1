@@ -67,7 +67,7 @@ namespace TPherencia
 
         private void limpiarCampos()
         {
-            tNombre.Clear(); mtDni.Clear(); dtFechaNacimiento.Text="01/01/2000";
+            tNombre.Clear(); mtDni.Clear(); dtFechaNacimiento.Text = "01/01/2000";
             mtLegajo.Clear(); cbCarrera.Text = "";
             mtLegajoEmpleado.Clear(); tCargo.Clear();
         }
@@ -76,7 +76,7 @@ namespace TPherencia
         {
             pos = -1; int i = 0;
             bool existe = false;
-            while(i < listPersonas.Count && !existe)
+            while (i < listPersonas.Count && !existe)
             {
                 if (listPersonas[i].Dni == persona.Dni)
                 {
@@ -84,7 +84,7 @@ namespace TPherencia
                     existe = true;
                 }
                 i++;
-            }            
+            }
             return existe;
         }
 
@@ -100,7 +100,7 @@ namespace TPherencia
             {
                 listPersonas[i] = persona;
                 MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }                 
+            }
         }
 
         private void bGuardar_Click(object sender, EventArgs e)
@@ -110,27 +110,28 @@ namespace TPherencia
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");                
-            }          
+                mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");
+            }
 
-            else if (rbPersona.Checked)            
+            else if (rbPersona.Checked)
                 persona = new Persona(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text);
-            
+
             else if (rbEstudiante.Checked)
             {
                 if (!mtLegajo.MaskCompleted)
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");                    
+                    mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");
                 }
                 else persona = new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text);
+                chequearCarrera();
             }
             else if (rbEmpleado.Checked)
             {
                 if (!mtLegajoEmpleado.MaskCompleted)
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");                    
+                    mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");
                 }
                 else persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
             }
@@ -146,24 +147,24 @@ namespace TPherencia
 
         private void bMostrar_Click(object sender, EventArgs e)
         {
-            int i = 0; errorProvider.Clear(); 
+            int i = 0; errorProvider.Clear();
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido"); mtDni.Focus();
             }
             else if (existePersona(new Persona(mtDni.Text), out i))
-            { 
+            {
                 Persona pe = listPersonas[i];
                 tNombre.Text = pe.Nombre; dtFechaNacimiento.Text = pe.FechaNacimiento; rbPersona.Checked = true;
                 if (pe.GetType() == typeof(Estudiante))
                 {
-                    Estudiante es = (Estudiante) pe; rbEstudiante.Checked = true;
+                    Estudiante es = (Estudiante)pe; rbEstudiante.Checked = true;
                     mtLegajo.Text = es.Legajo; cbCarrera.Text = es.Carrera;
                 }
                 else if (pe.GetType() == typeof(Empleado))
                 {
-                    Empleado em = (Empleado) pe; rbEmpleado.Checked = true;
+                    Empleado em = (Empleado)pe; rbEmpleado.Checked = true;
                     mtLegajoEmpleado.Text = em.Legajo; tCargo.Text = em.Cargo;
                 }
             }
