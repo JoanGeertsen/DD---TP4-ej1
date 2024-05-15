@@ -72,76 +72,70 @@ namespace TPherencia
             mtLegajoEmpleado.Clear(); tCargo.Clear();
         }
 
-        private bool existePersona(Persona persona, out int index)
+        private bool existePersona(Persona persona, out int pos)
         {
-            index = -1;
-            for (int i = 0; i < listPersonas.Count; i++)
+            pos = -1; int i = 0;
+            bool existe = false;
+            while(i < listPersonas.Count && !existe)
             {
                 if (listPersonas[i].Dni == persona.Dni)
                 {
-                    index = i;
-                    return true;
+                    pos = i;
+                    existe = true;
                 }
-            }
-            return false;
+                i++;
+            }            
+            return existe;
         }
 
         private void ActualizarOInsertarPersona(Persona persona)
         {
-            int index;
-            if (existePersona(persona, out index))
-            {
-                if (deseaActualizar(listPersonas[index]))
-                {
-                    listPersonas[index] = persona;
-                    MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
+            int i;
+            if (!existePersona(persona, out i))
             {
                 listPersonas.Add(persona);
                 MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else if (deseaActualizar(listPersonas[i]))
+            {
+                listPersonas[i] = persona;
+                MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }                 
         }
 
         private void bGuardar_Click(object sender, EventArgs e)
         {
+            Persona persona = null;
+
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");
-                return;
-            }
+                mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");                
+            }          
 
-            Persona persona = null;
-
-            if (rbPersona.Checked)
-            {
+            else if (rbPersona.Checked)            
                 persona = new Persona(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text);
-            }
+            
             else if (rbEstudiante.Checked)
             {
                 if (!mtLegajo.MaskCompleted)
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");
-                    return;
+                    mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");                    
                 }
-                persona = new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text);
+                else persona = new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text);
             }
             else if (rbEmpleado.Checked)
             {
                 if (!mtLegajoEmpleado.MaskCompleted)
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");
-                    return;
+                    mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");                    
                 }
-                persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
+                else persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
             }
 
             ActualizarOInsertarPersona(persona);
-
             actualizarListBox(); limpiarCampos();
         }
 
