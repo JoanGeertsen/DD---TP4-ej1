@@ -34,21 +34,6 @@ namespace TPherencia
         {
             pEstudiante.Visible = false; pEmpleado.Visible = true;
         }
-
-        private bool existePersona(Persona p, out int i)
-        {
-            bool encontre = false;
-            i = 0;
-
-            while (!encontre && i < listPersonas.Count)
-            {
-                if (listPersonas[i] is Persona persona && persona.Dni == p.Dni)                
-                    encontre = true;                
-                else                
-                    i++;                
-            }
-            return encontre;
-        }
         private bool deseaActualizar(Persona p)
         {
             return MessageBox.Show($"Se encontró:\n\n{p.ToString()}\n\n¿Desea actualizarlo?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
@@ -87,29 +72,52 @@ namespace TPherencia
             mtLegajoEmpleado.Clear(); tCargo.Clear();
         }
 
+        private bool existePersona(Persona persona, out int index)
+        {
+            index = -1;
+            for (int i = 0; i < listPersonas.Count; i++)
+            {
+                if (listPersonas[i].Dni == persona.Dni)
+                {
+                    index = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void ActualizarOInsertarPersona(Persona persona)
+        {
+            int index;
+            if (existePersona(persona, out index))
+            {
+                if (deseaActualizar(listPersonas[index]))
+                {
+                    listPersonas[index] = persona;
+                    MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                listPersonas.Add(persona);
+                MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void bGuardar_Click(object sender, EventArgs e)
         {
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 mtDni.Focus(); errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido");
-
+                return;
             }
-            else if (rbPersona.Checked)
+
+            Persona persona = null;
+
+            if (rbPersona.Checked)
             {
-                if (existePersona(new Persona(mtDni.Text), out int i))//Actualizo Persona
-                {
-                    if (deseaActualizar(listPersonas[i]))
-                    {
-                        listPersonas[i].Nombre = tNombre.Text; listPersonas[i].FechaNacimiento = dtFechaNacimiento.Text;
-                        MessageBox.Show(listPersonas[i].ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else//Creo Persona
-                {
-                    listPersonas.Add(new Persona(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text));
-                    MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                persona = new Persona(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text);
             }
             else if (rbEstudiante.Checked)
             {
@@ -117,27 +125,9 @@ namespace TPherencia
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     mtLegajo.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajo, "Legajo inválido");
+                    return;
                 }
-                else
-                {
-                    if (existePersona(new Estudiante(mtDni.Text, mtLegajo.Text), out int i))//Actualizo Estudiante
-                    {
-                        if (deseaActualizar(listPersonas[i]))
-                        {
-                            Estudiante aux = (Estudiante)listPersonas[i];
-                            aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
-                            aux.Legajo = mtLegajo.Text;
-                            MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            chequearCarrera();
-                        }
-                    }
-                    else//Creo Eastudiante
-                    {
-                        listPersonas.Add(new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text));
-                        MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        chequearCarrera();
-                    }
-                }
+                persona = new Estudiante(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajo.Text, cbCarrera.Text);
             }
             else if (rbEmpleado.Checked)
             {
@@ -145,26 +135,13 @@ namespace TPherencia
                 {
                     MessageBox.Show("Debe ingresar un legajo VALIDO", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     mtLegajoEmpleado.Focus(); errorProvider.Clear(); errorProvider.SetError(mtLegajoEmpleado, "Legajo inválido");
+                    return;
                 }
-                else
-                {
-                    if (existePersona(new Empleado(mtDni.Text, mtLegajoEmpleado.Text), out int i))//Actualizo Empleado
-                    {
-                        if (deseaActualizar(listPersonas[i]))
-                        {
-                            Empleado aux = (Empleado)listPersonas[i];
-                            aux.Nombre = tNombre.Text; aux.FechaNacimiento = dtFechaNacimiento.Text;
-                            aux.Legajo = mtLegajoEmpleado.Text; aux.Cargo = tCargo.Text;
-                            MessageBox.Show(aux.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    else//Creo Empleado
-                    {
-                        listPersonas.Add(new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text));
-                        MessageBox.Show(listPersonas.Last().ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
+                persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
             }
+
+            ActualizarOInsertarPersona(persona);
+
             actualizarListBox(); limpiarCampos();
         }
 
