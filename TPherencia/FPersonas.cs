@@ -132,7 +132,7 @@ namespace TPherencia
                 else persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
             }
 
-            ActualizarOInsertarPersona(persona);
+            if(persona !=null) ActualizarOInsertarPersona(persona);
             actualizarListBox(); limpiarCampos();
         }
 
