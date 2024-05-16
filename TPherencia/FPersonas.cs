@@ -48,12 +48,29 @@ namespace TPherencia
 
             foreach (Persona p in listPersonas)
             {
-                if ((selectedIndex == 1 && p is Estudiante) ||
-                    (selectedIndex == 2 && p is Empleado) ||
-                    (selectedIndex != 1 && selectedIndex != 2 && p is Persona))
-                {
-                    lbPersonas.Items.Add(p.ToString());
+                bool mostrarPersona = false;
+
+                switch (selectedIndex)
+                {                   
+                    case 0: // TODOS
+                        mostrarPersona = true;
+                        break;
+                    case 1: // Personas
+                        mostrarPersona = p is Persona && !(p is Estudiante) && !(p is Empleado);
+                        break;
+                    case 2: // Estudiantes
+                        mostrarPersona = p is Estudiante;
+                        break;
+                    case 3: // Empleados
+                        mostrarPersona = p is Empleado;
+                        break;
+                    default:
+                        mostrarPersona = true;
+                        break;
                 }
+
+                if (mostrarPersona)                
+                    lbPersonas.Items.Add(p.ToString());                
             }
 
             lCantidad.Text = $"Cantidad: {lbPersonas.Items.Count}";
@@ -73,11 +90,11 @@ namespace TPherencia
         }
 
         private bool existePersona(Persona persona, out int pos)
-        {           
+        {
             int i = 0;
-            while (i < listPersonas.Count && listPersonas[i].Dni != persona.Dni)            
+            while (i < listPersonas.Count && listPersonas[i].Dni != persona.Dni)
                 i++;
-            
+
             pos = i < listPersonas.Count ? i : -1;
             return i < listPersonas.Count;
         }
@@ -132,7 +149,7 @@ namespace TPherencia
                 else persona = new Empleado(mtDni.Text, tNombre.Text, dtFechaNacimiento.Text, mtLegajoEmpleado.Text, tCargo.Text);
             }
 
-            if(persona !=null) ActualizarOInsertarPersona(persona);
+            if (persona != null) ActualizarOInsertarPersona(persona);
             actualizarListBox(); limpiarCampos();
         }
 
