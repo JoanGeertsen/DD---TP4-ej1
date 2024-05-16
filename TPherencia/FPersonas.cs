@@ -73,20 +73,15 @@ namespace TPherencia
         }
 
         private bool existePersona(Persona persona, out int pos)
-        {
-            pos = -1; int i = 0;
-            bool existe = false;
-            while (i < listPersonas.Count && !existe)
-            {
-                if (listPersonas[i].Dni == persona.Dni)
-                {
-                    pos = i;
-                    existe = true;
-                }
+        {           
+            int i = 0;
+            while (i < listPersonas.Count && listPersonas[i].Dni != persona.Dni)            
                 i++;
-            }
-            return existe;
+            
+            pos = i < listPersonas.Count ? i : -1;
+            return i < listPersonas.Count;
         }
+
 
         private void ActualizarOInsertarPersona(Persona persona)
         {
@@ -101,6 +96,7 @@ namespace TPherencia
                 listPersonas[i] = persona;
                 MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else MessageBox.Show("No hicieron cambios", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void bGuardar_Click(object sender, EventArgs e)
@@ -147,16 +143,17 @@ namespace TPherencia
 
         private void bMostrar_Click(object sender, EventArgs e)
         {
-            int i = 0; errorProvider.Clear();
+            errorProvider.Clear();
             if (!mtDni.MaskCompleted)
             {
                 MessageBox.Show("Debe ingresar un DNI valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 errorProvider.Clear(); errorProvider.SetError(mtDni, "DNI invalido"); mtDni.Focus();
             }
-            else if (existePersona(new Persona(mtDni.Text), out i))
+            else if (existePersona(new Persona(mtDni.Text), out int i))
             {
                 Persona pe = listPersonas[i];
                 tNombre.Text = pe.Nombre; dtFechaNacimiento.Text = pe.FechaNacimiento; rbPersona.Checked = true;
+
                 if (pe.GetType() == typeof(Estudiante))
                 {
                     Estudiante es = (Estudiante)pe; rbEstudiante.Checked = true;
@@ -192,6 +189,12 @@ namespace TPherencia
             {
                 e.Handled = true;
             }
+        }
+        private void tCargo_Leave(object sender, EventArgs e)
+        {
+            if (tCargo.Text.Trim() == "")
+                errorProvider.SetError(tCargo, "Cargo invalido");
+            else errorProvider.SetError(tCargo, "");
         }
 
         #endregion
@@ -240,14 +243,6 @@ namespace TPherencia
                 errorProvider.SetError(mtLegajoEmpleado, "Legajo invalido");
             else errorProvider.SetError(mtLegajoEmpleado, "");
         }
-        #endregion
-
-
-        private void tCargo_Leave(object sender, EventArgs e)
-        {
-            if (tCargo.Text.Trim() == "")
-                errorProvider.SetError(tCargo, "Cargo invalido");
-            else errorProvider.SetError(tCargo, "");
-        }
+        #endregion       
     }
 }

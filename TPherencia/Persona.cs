@@ -12,13 +12,13 @@
         #region Constructores
         public Persona(string dni)
         {
-            this.dni = (dni.Length == 10) ? dni : dniPorDefecto;
+            this.dni = (dni != null && dni.Length == 10) ? dni : dniPorDefecto;
             nombre = ""; fechaNacimiento = "";
         }
 
         public Persona(string dni, string nombre, string fechaNacimiento)
-        { //Las comprobaciones son temporales, hay que cambiarlas
-            this.dni = (dni.Length == 10) ? dni : dniPorDefecto;
+        { 
+            this.dni = (dni != null && dni.Length == 10) ? dni : dniPorDefecto;
             this.nombre = (nombre != null) ? nombre : "";        
             this.fechaNacimiento = (fechaNacimiento != null) ? fechaNacimiento : "";
         }
@@ -28,7 +28,7 @@
         public string Dni
         {
             get { return dni; }
-            set { dni = (value.Length == 10) ? value : dniPorDefecto; }
+            set { dni = (value != null && value.Length == 10) ? value : dniPorDefecto; }
         }
 
         public string Nombre
@@ -69,19 +69,13 @@
         {
             return int.Parse(dni.Replace(".", ""));
         }
-        #endregion
-
-        public int CompareTo(Persona other)
+        public int CompareTo(Persona p)
         {
-            if (other == null)
-            {
-                return 1; // Si la otra persona es nula, la actual es mayor
-            }
-            else
-            {
-                // Comparamos las personas por su DNI
-                return this.Dni.CompareTo(other.Dni);
-            }
+            int toReturn = 1;
+            if (p != null)
+                toReturn = dni.CompareTo(p.Dni);
+            return toReturn;
         }
+        #endregion
     }
 }

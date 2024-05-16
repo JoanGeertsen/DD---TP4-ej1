@@ -20,12 +20,13 @@ namespace DD_TP4_ej1
         #region Constructor 
         public Empleado(string documento, string legajo) : base(documento)
         {
-            this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;          
+            this.legajo = (legajo != null && legajo.Length == 6) ? legajo : legajoPorDefecto;
+            cargo = "";
         }
         public Empleado(string documento, string nombre, string fechaNacimiento,
             string legajo, string cargo) : base(documento, nombre, fechaNacimiento)
         {
-            this.legajo = (legajo.Length == 6) ? legajo : legajoPorDefecto;
+            this.legajo = (legajo != null && legajo.Length == 6) ? legajo : legajoPorDefecto;
             this.cargo = (cargo != null) ? cargo : "";
         }
         #endregion
@@ -34,7 +35,7 @@ namespace DD_TP4_ej1
         public string Legajo
         {
             get { return legajo; }
-            set { legajo = (value.Length == 6) ? value : legajoPorDefecto; }
+            set { legajo = (value != null && value.Length == 6) ? value : legajoPorDefecto; }
         }
 
         public string Cargo
