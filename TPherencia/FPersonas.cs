@@ -92,29 +92,54 @@ namespace TPherencia
         private bool existePersona(Persona persona, out int pos)
         {
             int i = 0;
-            while (i < listPersonas.Count && listPersonas[i].Dni != persona.Dni)
+            bool existe = false;
+
+            while (i < listPersonas.Count && !existe)
+            {
+                if ((persona is Estudiante estudiante) && (listPersonas[i] is Estudiante estudianteExistente) && (estudianteExistente.Legajo == estudiante.Legajo))               
+                    existe = true;    
+                
+                else if ((persona is Empleado empleado) && (listPersonas[i] is Empleado empleadoExistente) && (empleadoExistente.Legajo == empleado.Legajo))         
+                    existe = true;   
+                
+                else if (listPersonas[i].Dni == persona.Dni)              
+                    existe = true;
+                
                 i++;
+            }
 
-            pos = i < listPersonas.Count ? i : -1;
-            return i < listPersonas.Count;
+            pos = existe ? i - 1 : -1;
+            return existe;
         }
-
 
         private void ActualizarOInsertarPersona(Persona persona)
         {
-            int i;
-            if (!existePersona(persona, out i))
+        
+            if (!existePersona(persona, out int i))
             {
                 listPersonas.Add(persona);
                 MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (deseaActualizar(listPersonas[i]))
-            {
-                listPersonas[i] = persona;
-                MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {                
+                bool mismoTipo = listPersonas[i].GetType() == persona.GetType();
+
+                if (mismoTipo)               
+                    MessageBox.Show("Ya existe una persona con ese legajo.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+             
+                else if (deseaActualizar(listPersonas[i]))
+                {
+                    listPersonas[i] = persona;
+                    MessageBox.Show(persona.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else MessageBox.Show("No se realizaron cambios.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
             }
-            else MessageBox.Show("No hicieron cambios", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            actualizarListBox();
+            limpiarCampos();
         }
+
 
         private void bGuardar_Click(object sender, EventArgs e)
         {
